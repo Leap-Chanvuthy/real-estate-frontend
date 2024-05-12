@@ -1,8 +1,6 @@
+import React from "react";
+import { Routes, Route } from "react-router-dom";
 import HomePage from "./routes/homePage/homePage";
-import {
-  createBrowserRouter,
-  RouterProvider,
-} from "react-router-dom";
 import ListPage from "./routes/listPage/listPage";
 import Layout from "./routes/layout/layout";
 import SinglePage from "./routes/singlePage/singlePage";
@@ -11,42 +9,19 @@ import Login from "./routes/login/login";
 import Register from "./routes/register/register";
 
 function App() {
-  const router = createBrowserRouter([
-    {
-      path: "/",
-      element: <Layout />,
-      children:[
-        {
-          path:"/",
-          element:<HomePage/>
-        },
-        {
-          path:"/list",
-          element:<ListPage/>
-        },
-        {
-          path:"/:id",
-          element:<SinglePage/>
-        },
-        {
-          path:"/profile",
-          element:<ProfilePage/>
-        },
-        {
-          path:"/login",
-          element:<Login/>
-        },
-        {
-          path:"/register",
-          element:<Register/>
-        }
-      ]
-    }
-  ]);
+
 
   return (
-
-    <RouterProvider router={router}/>
+      <Routes>
+          <Route path="/" element={<Layout />} >
+          <Route path="/" element={<HomePage />} />
+          <Route path="/list" element={<ListPage />} />
+          <Route path="/:id" element={<SinglePage />} />
+          <Route path="/profile" element={<ProfilePage />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+        </Route>
+      </Routes>
   );
 }
 
