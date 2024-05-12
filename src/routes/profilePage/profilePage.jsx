@@ -1,8 +1,16 @@
 import Chat from "../../components/chat/Chat";
 import List from "../../components/list/List";
+import { useSelector } from "react-redux";
 import "./profilePage.scss";
 
 function ProfilePage() {
+
+  const currentUser = useSelector((state) => state.auth.currentUser);
+
+  const username = currentUser.data.user.name;
+  const email = currentUser.data.user.email;
+  const joinDate = currentUser.data.user.created_at;
+
   return (
     <div className="profilePage">
       <div className="details">
@@ -20,10 +28,13 @@ function ProfilePage() {
               />
             </span>
             <span>
-              Username: <b>John Doe</b>
+              Username: <b>{username}</b>
             </span>
             <span>
-              E-mail: <b>john@gmail.com</b>
+              E-mail: <b>{email}</b>
+            </span>
+            <span>
+              Join since: <b>{joinDate}</b>
             </span>
           </div>
           <div className="title">

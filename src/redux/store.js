@@ -1,10 +1,22 @@
-import { configureStore } from "@reduxjs/toolkit";
-import counterReducer from "./counter/counterSlice"; // Adjust import name if necessary
+import { configureStore, combineReducers } from "@reduxjs/toolkit";
+import { persistReducer, persistStore } from 'redux-persist';
+import storage from 'redux-persist/lib/storage';
+import authReducer from "./auth/authSlice";
 
-const store = configureStore({
-    reducer: {
-        counter: counterReducer,
-    },
+const rootReducer = combineReducers({
+    auth: authReducer,
 });
 
-export default store;
+const persistConfig = {
+    key: 'root',
+    storage,
+    version: 1
+};
+
+const persistedReducer = persistReducer(persistConfig, rootReducer); // Renamed to persistedReducer
+
+export const store = configureStore({
+    reducer: persistedReducer
+});
+
+export const persistor = persistStore(store);
