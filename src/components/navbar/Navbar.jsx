@@ -3,19 +3,22 @@ import "./navbar.scss";
 import { Link , useLoaderData, useLocation, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { persistor } from "../../redux/store";
+import { Spinner } from "flowbite-react";
 
 function Navbar() {
   const [open, setOpen] = useState(false);
   const currentUser = useSelector((state) => state.auth.currentUser);
   const path = useLocation().pathname;
-  const navigate = useNavigate();
+  const [loading , setLoading] = useState(false);
 
 
   const logout = async () => {
+    setLoading(true);
     await persistor.purge();
     setTimeout(() => {
       window.location.href = "/";
     }, 2000);
+    setLoading(false)
   }
 
   return (
@@ -41,7 +44,7 @@ function Navbar() {
               <div className="notification">3</div>
               <span>Profile</span>
             </Link>
-            <button className="border-2 border-red-400 py-3 px-6 text-red-400 rounded-md" onClick={logout}>Logout</button>
+            <button className="border-2 border-red-400 py-3 px-6 text-red-400 rounded-md" onClick={logout}>{loading ? <Spinner aria-label="Medium sized spinner example" size="md" /> : 'Logout'}</button>
           </div>
         ) : (
           <>
