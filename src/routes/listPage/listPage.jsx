@@ -1,16 +1,13 @@
-import { listData } from "../../lib/dummydata";
-import "./listPage.scss";
-import Filter from "../../components/filter/Filter";
-import Card from "../../components/card/Card";
-import Map from "../../components/map/Map";
 import { useState, useEffect } from "react";
 import { Spinner } from "flowbite-react";
 import Pagination from '@mui/material/Pagination';
 import axios from "axios";
+import "./listPage.scss";
+import Filter from "../../components/filter/Filter";
+import Card from "../../components/card/Card";
+import Map from "../../components/map/Map";
 
 function ListPage() {
-  const data = listData;
-
   // Pagination state
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPage, setTotalPage] = useState(1);
@@ -21,12 +18,12 @@ function ListPage() {
   const [error, setError] = useState(null);
 
   // Fetch properties list
-  const fetchProperties = async (page = currentPage) => { 
+  const fetchProperties = async (page = currentPage) => {
     try {
       const response = await axios.get(`http://127.0.0.1:8000/api/properties/?page=${page}`);
       setProperties(response.data);
       setCurrentPage(response.data.meta.current_page);
-      setTotalPage(response.data.meta.total);
+      setTotalPage(response.data.meta.last_page);
     } catch (error) {
       setError(error.message);
     } finally {
@@ -37,11 +34,11 @@ function ListPage() {
   // Pagination function (handlePageChange)
   const handlePageChange = (event, newPage) => {
     setCurrentPage(newPage);
-    fetchProperties(newPage); 
+    fetchProperties(newPage);
   };
 
   useEffect(() => {
-    fetchProperties(); 
+    fetchProperties();
   }, []);
 
   return (
@@ -53,11 +50,12 @@ function ListPage() {
           {properties.data && properties.data.map(property => (
             <Card key={property.id} property={property} />
           ))}
+          {error && <div className="error">{error}</div>}
           <Pagination count={totalPage} page={currentPage} onChange={handlePageChange} size="large" showFirstButton showLastButton color="primary" />
         </div>
       </div>
       <div className="mapContainer">
-        <Map items={data} />
+        <Map items={properties.data} />
       </div>
     </div>
   );
