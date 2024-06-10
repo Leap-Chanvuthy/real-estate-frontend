@@ -145,7 +145,7 @@ const RecentCard = () => {
                 <h4>Property Name</h4>
                 <p className="">
                   <i className='fa fa-location-dot'></i> 
-                  <span>{val.property_location ? `${val.property_location.city.name}, ${val.property_location.country.name}` : <h6 className="text-red-400">Not available</h6>}</span>
+                  {/* <span>{val.property_location ? `${val.property_location.city.name}, ${val.property_location.country.name}` : <h6 className="text-red-400">Not available</h6>}</span> */}
                 </p>
               </div>
               <div className='button flex'>
