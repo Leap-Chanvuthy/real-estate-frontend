@@ -145,12 +145,12 @@ const RecentCard = () => {
                 <h4>Property Name</h4>
                 <p className="">
                   <i className='fa fa-location-dot'></i> 
-                  <span>{val.property_location ? `${val.property_location.city.name}, ${val.property_location.country.name}` : <h6 className="text-red-400">Not available</h6>}</span>
+                  <span>{val.property_location ? `${val.property_location.city.name}, ${val.property_location.district.name}, ${val.property_location.village.name}` : <h6 className="text-red-400">Not available</h6>}</span>
                 </p>
               </div>
               <div className='button flex'>
                 <div>
-                  <button className='btn2'>{price}</button> <label htmlFor=''>/sqft</label>
+                  <button className='btn2'>$ {price}</button>
                 </div>
                 <span>{val.property_type.name}</span>
               </div>
