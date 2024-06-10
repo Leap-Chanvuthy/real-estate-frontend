@@ -1,50 +1,67 @@
-import React from "react"
-import Heading from "../../common/Heading"
-import { team } from "../../data/Data"
-import "./team.css"
+import React, { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import axios from 'axios';
+import { fetchAgentsStart, fetchAgentsSuccess, fetchAgentsFailure } from "../../../redux/slice/agentsSlice";
+import Heading from "../../common/Heading";
 
 const Team = () => {
-  return (
-    <>
-      <section className='team background'>
-        <div className='container'>
-          <Heading title='Our Featured Agents' subtitle='Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.' />
+    const dispatch = useDispatch();
+    const { agents, error, loading } = useSelector((state) => state.agents);
 
-          <div className='grid grid-cols-1 lg:md:grid-cols-2 gap-5 mt-5'>
-            {team.map((val, index) => (
-              <div className='box' key={index}>
-                <button className='btn3'>{val.list} Listings</button>
-                <div className='details'>
-                  <div className='img'>
-                    <img src={val.cover} alt='' />
-                    <i className='fa-solid fa-circle-check'></i>
-                  </div>
-                  <i className='fa fa-location-dot'></i>
-                  <label>{val.address}</label>
-                  <h4>{val.name}</h4>
+    useEffect(() => {
+        fetchAgents();
+    }, []);
 
-                  <ul>
-                    {val.icon.map((icon, index) => (
-                      <li key={index}>{icon}</li>
+    useEffect(() => {
+        console.log("Agents:", agents);
+    }, [agents]);
+
+    const fetchAgents = async () => {
+        dispatch(fetchAgentsStart());
+        try {
+            const response = await axios.get(`http://127.0.0.1:8001/api/KPI/top-ten-agents`);
+            console.log("API Response:", response.data);
+            dispatch(fetchAgentsSuccess(response.data));
+        } catch (error) {
+            console.error("Fetch Agents Error:", error);
+            dispatch(fetchAgentsFailure(error.response?.data?.message || "Failed to fetch agents"));
+        }
+    };
+
+    if (loading) return <p>Loading...</p>;
+    if (error) return <p>Error: {error}</p>;
+
+    return (
+        <section className="team bg-gray-200 py-12">
+            <Heading title="Our Featured Agents" subtitle="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam." />
+            <div className="container mx-auto px-4 overflow-x-auto">
+                <div className="flex flex-nowrap mt-6">
+                    {agents.map((agent, index) => (
+                        <div key={index} className="bg-white rounded shadow p-6 mr-6">
+                            <div className="flex items-center mb-4">
+                                <div className="w-12 h-12 bg-gray-300 rounded-full flex items-center justify-center mr-4">
+                                </div>
+                                <div>
+                                    <h4 className="text-lg font-semibold">{agent.name}</h4>
+                                    <p className="text-gray-600">{agent.email}</p>
+                                </div>
+                            </div>
+                            <div className="flex justify-between">
+                                <button className="bg-blue-500 text-white px-4 py-2 rounded flex items-center">
+                                    <i className="far fa-envelope mr-2"></i>
+                                    Message
+                                </button>
+                                <button className="bg-green-500 text-white px-4 py-2 rounded flex items-center">
+                                    <i className="fas fa-phone-alt mr-2"></i>
+                                    Call
+                                </button>
+                            </div>
+                        </div>
                     ))}
-                  </ul>
-                  <div className='button flex'>
-                    <button>
-                      <i className='fa fa-envelope'></i>
-                      Message
-                    </button>
-                    <button className='btn4'>
-                      <i className='fa fa-phone-alt'></i>
-                    </button>
-                  </div>
                 </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-    </>
-  )
+            </div>
+        </section>
+    );
 }
 
-export default Team
+export default Team;
