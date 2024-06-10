@@ -108,7 +108,7 @@ const RecentCard = () => {
   const fetchProperties = async (page = currentPage) => {
     dispatch(fetchPropertiesStart());
     try {
-      const response = await axios.get(`http://127.0.0.1:8000/api/properties/?page=${page}`);
+      const response = await axios.get(`http://127.0.0.1:8001/api/properties/?page=${page}`);
       console.log("API Response:", response.data);
       dispatch(fetchPropertiesSuccess(response.data));
       setCurrentPage(response.data.meta.current_page);
@@ -150,7 +150,7 @@ const RecentCard = () => {
               </div>
               <div className='button flex'>
                 <div>
-                  <button className='btn2'>{price}</button> <label htmlFor=''>/sqft</label>
+                  <button className='btn2'>$ {price}</button>
                 </div>
                 <span>{val.property_type.name}</span>
               </div>
