@@ -12,15 +12,10 @@ const FeaturedCard = () => {
         fetchPropertyTypes();
     }, []);
 
-    useEffect(() => {
-        console.log("Properties:", propertyTypes);
-    }, [propertyTypes]);
-
     const fetchPropertyTypes = async () => {
         dispatch(fetchPropertyTypesStart());
         try {
             const response = await axios.get(`http://127.0.0.1:8000/api/property-types`);
-            console.log("API Response:", response.data);
             dispatch(fetchPropertyTypesSuccess(response.data));
         } catch (error) {
             console.error("Fetch Property Types Error:", error);

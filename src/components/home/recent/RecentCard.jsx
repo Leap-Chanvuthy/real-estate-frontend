@@ -101,15 +101,11 @@ const RecentCard = () => {
     fetchProperties();
   }, []);
 
-  useEffect(() => {
-    console.log("Properties:", properties);
-  }, [properties]);
 
   const fetchProperties = async (page = currentPage) => {
     dispatch(fetchPropertiesStart());
     try {
-      const response = await axios.get(`http://127.0.0.1:8001/api/properties/?page=${page}`);
-      console.log("API Response:", response.data);
+      const response = await axios.get(`http://127.0.0.1:8000/api/properties/?page=${page}`);
       dispatch(fetchPropertiesSuccess(response.data));
       setCurrentPage(response.data.meta.current_page);
       setTotalPage(response.data.meta.last_page);

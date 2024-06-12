@@ -1,7 +1,7 @@
 import TextField from "@mui/material/TextField";
 import Alert from '@mui/material/Alert';
 import axios from 'axios';
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { signInFailure, signInStart, signInSuccess } from "../../redux/slice/authSlice";
 import { useSelector, useDispatch } from "react-redux";
@@ -9,7 +9,7 @@ import { useSelector, useDispatch } from "react-redux";
 const Register = () => {
   const dispatch = useDispatch();
   const { loading, error } = useSelector((state) => state.auth);
-  const [success , setSuccess] = useState(false);
+  const [success, setSuccess] = useState(false);
 
   const [values, setValues] = useState({
     name: "",
@@ -17,6 +17,13 @@ const Register = () => {
     password: "",
     password_confirmation: ""
   });
+
+  useEffect(() => {
+    if (success) {
+      const timer = setTimeout(() => setSuccess(false), 3000);
+      return () => clearTimeout(timer);
+    }
+  }, [success]);
 
   const handleChange = (e) => {
     const key = e.target.id;
@@ -59,7 +66,11 @@ const Register = () => {
           <h1 className="font-bold text-2xl text-gray-900">
             Register a New Account
           </h1>
-          {success ? <Alert severity="success" className="w-full">You're Successfully Registered !</Alert> : <></>}
+          {success && (
+            <Alert severity="success" className="w-full">
+              You're Successfully Registered!
+            </Alert>
+          )}
           <form onSubmit={handleSubmit} className="flex flex-col gap-5 w-full text-start">
             <TextField
               id="name"
@@ -108,6 +119,7 @@ const Register = () => {
             <button
               className="bg-slate-800 px-1 py-2 rounded-sm text-white w-full"
               type="submit"
+              disabled={loading}
             >
               {loading ? "Loading..." : "Register"}
             </button>
@@ -116,7 +128,7 @@ const Register = () => {
             <p className="font-medium">
               Already Registered?{" "}
               <Link className="text-blue-400" to="/login">
-                login
+                Login
               </Link>
             </p>
           </div>

@@ -1,7 +1,7 @@
 import TextField from "@mui/material/TextField";
 import Alert from '@mui/material/Alert';
 import axios from 'axios';
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { signInFailure, signInStart, signInSuccess } from "../../redux/slice/authSlice";
 import { useSelector, useDispatch } from "react-redux";
@@ -9,12 +9,19 @@ import { useSelector, useDispatch } from "react-redux";
 const Login = () => {
   const dispatch = useDispatch();
   const { loading, error } = useSelector((state) => state.auth);
-  const [success , setSuccess] = useState(false);
+  const [success, setSuccess] = useState(false);
 
   const [values, setValues] = useState({
     email: "",
     password: "",
   });
+
+  useEffect(() => {
+    if (success) {
+      const timer = setTimeout(() => setSuccess(false), 3000);
+      return () => clearTimeout(timer);
+    }
+  }, [success]);
 
   const handleChange = (e) => {
     const key = e.target.id;
@@ -55,7 +62,11 @@ const Login = () => {
           <h1 className="font-bold text-2xl text-gray-900">
             Login to Your Account
           </h1>
-          {success ? <Alert severity="success" className="w-full">Logged In Successfully !</Alert> : <></>}
+          {success && (
+            <Alert severity="success" className="w-full">
+              Logged In Successfully!
+            </Alert>
+          )}
           <form onSubmit={handleSubmit} className="flex flex-col gap-5 w-full text-start">
             <TextField
               id="email"
@@ -82,13 +93,14 @@ const Login = () => {
             <button
               className="bg-slate-800 px-1 py-2 rounded-sm text-white w-full"
               type="submit"
+              disabled={loading}
             >
-              {loading ? "Loading..." : "Register"}
+              {loading ? "Loading..." : "Login"}
             </button>
           </form>
           <div>
             <p className="font-medium">
-              Don't Have an Account Yet ?{" "}
+              Don't Have an Account Yet?{" "}
               <Link className="text-blue-400" to="/register">
                 Register
               </Link>

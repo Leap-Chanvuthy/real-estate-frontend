@@ -12,15 +12,11 @@ const Team = () => {
         fetchAgents();
     }, []);
 
-    useEffect(() => {
-        console.log("Agents:", agents);
-    }, [agents]);
 
     const fetchAgents = async () => {
         dispatch(fetchAgentsStart());
         try {
-            const response = await axios.get(`http://127.0.0.1:8001/api/KPI/top-ten-agents`);
-            console.log("API Response:", response.data);
+            const response = await axios.get(`http://127.0.0.1:8000/api/KPI/top-ten-agents`);
             dispatch(fetchAgentsSuccess(response.data));
         } catch (error) {
             console.error("Fetch Agents Error:", error);
