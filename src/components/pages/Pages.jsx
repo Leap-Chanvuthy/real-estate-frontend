@@ -59,7 +59,7 @@ import Profile from "../profile/Profile";
 const Pages = () => {
   const { currentUser } = useSelector((state) => state.auth);
   const user = currentUser?.user;
-  console.log(user)
+  console.log(currentUser)
 
   return (
     <Router>

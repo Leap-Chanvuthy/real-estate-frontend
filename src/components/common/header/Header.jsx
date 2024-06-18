@@ -11,7 +11,6 @@ const Header = () => {
   const { currentUser } = useSelector((state) => state.auth);
 
   const user = currentUser?.user;
-  console.log(user);
 
   return (
     <header>

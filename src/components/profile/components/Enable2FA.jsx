@@ -1,11 +1,14 @@
 import axios from "axios";
-import { useState } from "react";
-import { useSelector } from "react-redux";
+import { useEffect, useState } from "react";
+import { useSelector , useDispatch } from "react-redux";
 import {CircularProgress , Button} from '@mui/material';
+import { updateUserProfile } from "../../../redux/slice/authSlice";
 
 const Enable2FA = () => {
   const { currentUser } = useSelector((state) => state.auth);
+  console.log(currentUser);
   const authorisation = currentUser?.authorisation;
+  const dispatch = useDispatch();
 
   const [QRImage, setQRImage] = useState(null);
   const [loading , setLoading] = useState(false);
@@ -22,9 +25,9 @@ const Enable2FA = () => {
         }
       );
 
-      if (response.status === 200) {
+      if (response.status == 200) {
         setLoading(false);
-        setQRImage(response.data.QR_Image); // Assuming QRImage is returned from server
+        setQRImage(response.data.QR_Image);
         console.log(response);
       }
     } catch (error) {
@@ -45,7 +48,7 @@ const Enable2FA = () => {
               {loading ? <CircularProgress size={25} /> : "Enable"}
             </Button>
         </div>
-        <div className="mt-5">
+        {/* <div className="mt-5">
           <strong>Steps :</strong>
           <ul>
             <li>Click Enable</li>
@@ -53,14 +56,14 @@ const Enable2FA = () => {
             <li>Enter Your OTP Code</li>
             <li className="font-bold text-green-500">Done ✔</li>
           </ul>
-        </div>
+        </div> */}
       </div>
       <div className="w-full ">
         <div className="flex">
           {QRImage && (
             <div
               dangerouslySetInnerHTML={{ __html: QRImage }}
-              style={{ maxWidth: "200px" }} // Set a max width for the QR code image
+              style={{ maxWidth: "200px" }}
             />
           )}
         </div>

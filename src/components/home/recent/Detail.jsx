@@ -15,7 +15,6 @@ import Review from "./Review";
 const Detail = () => {
     const { id } = useParams();
     const { properties, error, loading } = useSelector((state) => state.properties);
-    console.log(properties);
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -36,16 +35,14 @@ const Detail = () => {
         getPropertyDetail();
     }, [id, dispatch]);
 
-    if (loading) {
-        return <div>Loading...</div>;
-    }
+
 
     if (error) {
         return <div>Error: {error}</div>;
     }
 
     return (
-        <div className="w-full bg-gray-100 p-6 md:p-10">
+        <div className="w-full flex flex-col gap-3 bg-gray-100 p-6 md:p-10">
             <div className="max-w-6xl mx-auto bg-white shadow-lg rounded-lg overflow-hidden">
                 <PropertyImageSlider/>
                 <div className="p-6 md:p-10">
@@ -136,8 +133,10 @@ const Detail = () => {
                             ))}
                         </div>
                     </div>
-                    <Review property_id={properties.id}/>
                 </div>
+            <div className="w-full mx-auto  shadow-lg rounded-lg overflow-hidden">
+                <Review property_id={{id}}/>
+            </div>
             </div>
         </div>
     );

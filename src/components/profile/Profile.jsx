@@ -10,6 +10,8 @@ import axios from "axios";
 import UpdateProfile from "./components/UpdateProfile";
 import UpdatePassword from "./components/UpdatePassword";
 import Enable2FA from "./components/Enable2FA";
+import Disable2FA from "./components/Disable2FA";
+import SkeletonTypography from "../common/LoadingSkeleton";
 
 const Profile = () => {
   const { currentUser } = useSelector((state) => state.auth);
@@ -80,7 +82,9 @@ const Profile = () => {
       <hr />
       <UpdatePassword />
       <hr />
-      <Enable2FA/>
+      <div>
+        {user.two_fa_enabled == true ? <Disable2FA/> : <Enable2FA/> }
+      </div>
     </div>
   );
 };
