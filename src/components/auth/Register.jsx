@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { signInFailure, signInStart, signInSuccess } from "../../redux/slice/authSlice";
 import { useSelector, useDispatch } from "react-redux";
+import {BASE_URL} from "../../constants/const";
 
 const Register = () => {
   const dispatch = useDispatch();
@@ -36,7 +37,7 @@ const Register = () => {
     dispatch(signInStart());
     try {
       const response = await axios.post(
-        "http://127.0.0.1:8000/api/register",
+        `${BASE_URL}/register`,
         values
       );
       console.log(response);
