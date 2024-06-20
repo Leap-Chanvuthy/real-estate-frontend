@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import axios from 'axios';
 import { fetchAgentsStart, fetchAgentsSuccess, fetchAgentsFailure } from "../../../redux/slice/agentsSlice";
 import Heading from "../../common/Heading";
+import {BASE_URL} from "../../../constants/const";
 
 const Team = () => {
     const dispatch = useDispatch();
@@ -16,7 +17,7 @@ const Team = () => {
     const fetchAgents = async () => {
         dispatch(fetchAgentsStart());
         try {
-            const response = await axios.get(`http://127.0.0.1:8000/api/KPI/top-ten-agents`);
+            const response = await axios.get(`${BASE_URL}/KPI/top-ten-agents`);
             dispatch(fetchAgentsSuccess(response.data));
         } catch (error) {
             console.error("Fetch Agents Error:", error);
