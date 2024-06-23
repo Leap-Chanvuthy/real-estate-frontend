@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import axios from 'axios';
 import { fetchPropertyTypesSuccess, fetchPropertyTypesStart, fetchPropertyTypesFailure } from "../../../redux/slice/propertyTypesSlice"; // Ensure the correct path to your slice
 import {featured} from "../../data/Data";
+import {BASE_URL} from "../../../constants/const";
 
 const FeaturedCard = () => {
     const dispatch = useDispatch();
@@ -15,7 +16,7 @@ const FeaturedCard = () => {
     const fetchPropertyTypes = async () => {
         dispatch(fetchPropertyTypesStart());
         try {
-            const response = await axios.get(`http://127.0.0.1:8000/api/property-types`);
+            const response = await axios.get(`${BASE_URL}/property-types`);
             dispatch(fetchPropertyTypesSuccess(response.data));
         } catch (error) {
             console.error("Fetch Property Types Error:", error);
