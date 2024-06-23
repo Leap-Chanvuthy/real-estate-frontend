@@ -1,9 +1,9 @@
 import { useSelector } from "react-redux";
 import TextField from "@mui/material/TextField";
 import Alert from "@mui/material/Alert";
-import { Button } from "@mui/material";
+import { CircularProgress, Button } from "@mui/material";
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useParams } from "react-router-dom";
 
 const Review = () => {
@@ -83,7 +83,7 @@ const Review = () => {
           />
           <TextField
             fullWidth
-            label="Rating"
+            label="Rate 1 to 5"
             id="rating"
             type="number"
             error={Boolean(errorArray?.rating)}
@@ -94,7 +94,7 @@ const Review = () => {
         </div>
         <div className="mt-2">
           <Button variant="outlined" size="medium" type="submit">
-            {loading ? "Loading" : "Review"}
+          {loading ? <CircularProgress size={25} /> : "Review"}
           </Button>
         </div>
       </form>

@@ -45,7 +45,11 @@ const Login = () => {
           email: "",
           password: "",
         });
-        window.location.href = '/';
+        if (response.data.message == "2FA required"){
+          window.location.href = '/verify2fa';
+        } else {
+          window.location.href = '/';
+        }
       } else {
         dispatch(signInFailure(response.data.errors));
       }
