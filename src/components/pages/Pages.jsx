@@ -70,7 +70,7 @@ const Pages = () => {
         <Route exact path="/property/:id" component={Detail} />
         <Route exact path="/about" component={About} />
         <Route exact path="/services" component={Services} />
-        <Route exact path="/blog" component={Blog} />
+        <Route exact path="/property" component={Blog} />
         <Route exact path="/pricing" component={Pricing} />
         <Route exact path="/contact" component={Contact} />
         <Route exact path="/profile" component={Profile} />

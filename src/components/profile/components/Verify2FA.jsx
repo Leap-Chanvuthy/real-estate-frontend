@@ -2,14 +2,16 @@ import React, { useState } from "react";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import axios from "axios";
-import { useSelector } from "react-redux";
 import { Alert } from "@mui/material";
+import { useDispatch , useSelector } from "react-redux";
+import { signInSuccess , signInStart , signInFailure } from "../../../redux/slice/authSlice";
 
 const Verify2FA = () => {
   const { currentUser } = useSelector((state) => state.auth);
+  const dispatch = useDispatch(); 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
-  const [success, setSuccess] = useState(false); // New state for success alert
+  const [success, setSuccess] = useState(false); 
 
   const [values, setValues] = useState({
     one_time_password: ""
@@ -31,7 +33,7 @@ const Verify2FA = () => {
       const response = await axios.post(
         `http://127.0.0.1:8000/api/verify2fa`, values,
         {
-          headers: { Authorization: `Bearer ${currentUser.authorisation.token}` },
+          // headers: { Authorization: `Bearer ${currentUser.authorisation.token}` },
         }
       );
 
@@ -39,10 +41,10 @@ const Verify2FA = () => {
 
       if (response.status == 200) {
         setValues({one_time_password : ""});
-        setSuccess(true); // Set success state to true on successful verification
-        setTimeout(() => {
-          window.location.href = "/profile";
-        }, 3000);
+        setSuccess(true); 
+        // setTimeout(() => {
+        //   window.location.href = "/profile";
+        // }, 3000);
       }
     } catch (error) {
       console.error("Error verifying 2FA code:", error);
