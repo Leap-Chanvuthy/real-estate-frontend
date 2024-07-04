@@ -45,7 +45,7 @@
 //             {error && <p className="text-red-500 text-center">{error}</p>}
 //             <div className='grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 gap-4 mt-5'>
 //                 {Array.isArray(properties.data) && properties.data.map((val, index) => {
-//                     const {price, badge} = val;
+//                     const {price, badge , property_location} = val;
 //                     return (
 //                         <div className='box shadow' key={index}>
 //                             <Link to={`/property/${val.id}`}>
@@ -69,7 +69,7 @@
 //                                     <h4>Property Name</h4>
 //                                     <p className="">
 //                                         <i className='fa fa-location-dot'></i>
-//                                         {/* <span>{val.property_location ? `${val.property_location.city.name}, ${val.property_location.country.name}` : <h6 className="text-red-400">Not available</h6>}</span> */}
+//                                         <span>{property_location?.city?.name}</span>
 //                                     </p>
 //                                 </div>
 //                                 <div className='button flex'>
@@ -92,6 +92,7 @@
 // }
 
 // export default RecentCard;
+
 
 
 import React, { useEffect, useState } from "react";
@@ -144,7 +145,7 @@ const RecentCard = () => {
       {Array.from(new Array(6)).map((_, index) => (
         <Grid item xs={12} sm={6} lg={4} key={index}>
           <Box sx={{ width: '100%', margin: '0 auto' }}>
-            <Skeleton variant="rectangular" width="100%" height={150} />
+            <Skeleton variant="rectangular" width="100%" height={250} />
             <Box sx={{ pt: 0.5 }}>
               <Skeleton />
               <Skeleton width="60%" />
@@ -156,72 +157,68 @@ const RecentCard = () => {
   );
 
   return (
-    <div className="flex flex-col justify-center mt-5">
+    <div className="flex flex-col justify-center">
       {loading && <SkeletonLoading />}
       {error && <p className="text-red-500 text-center">{error}</p>}
-      {!loading && (
-        <>
-          <div className="grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 gap-4 mt-5">
-            {Array.isArray(properties.data) &&
-              properties.data.map((val, index) => {
-                const { price, badge } = val;
-                return (
-                  <div className="box shadow" key={index}>
-                    <Link to={`/property/${val.id}`}>
-                      <div className="img">
-                        {val.property_images.length > 0 ? (
-                          <img
-                            src={`${BASE_IMAGE_URL}/storage/${val.property_images[0].image}`}
-                            alt="property"
-                            className="h-[15rem] object-cover w-full"
-                          />
-                        ) : (
-                          <img src={DEFAULT_IMAGE} alt="property" className="h-[15rem] object-cover w-full" />
-                        )}
-                      </div>
-                      <div className="text">
-                        <div className="category flex">
-                          <span
-                            style={{
-                              background: badge === "For Sale" ? "#25b5791a" : "#ff98001a",
-                              color: badge === "For Sale" ? "#25b579" : "#ff9800",
-                            }}
-                          >
-                            {badge}
-                          </span>
-                          <i className="fa fa-heart"></i>
-                        </div>
-                        <h4>Property Name</h4>
-                        <p className="">
-                          <i className="fa fa-location-dot"></i>
-                          {/* <span>{val.property_location ? `${val.property_location.city.name}, ${val.property_location.country.name}` : <h6 className="text-red-400">Not available</h6>}</span> */}
-                        </p>
-                      </div>
-                      <div className="button flex">
-                        <div>
-                          <button className="btn2">$ {price}</button>
-                        </div>
-                        <span>{val.property_type.name}</span>
-                      </div>
-                    </Link>
+      <div className="grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 gap-4 mt-5">
+        {Array.isArray(properties.data) &&
+          properties.data.map((property, index) => {
+            const { price, badge, property_location, property_images, property_type } = property;
+            return (
+              <div className="box shadow" key={index}>
+                <Link to={`/property/${property.id}`}>
+                  <div className="img">
+                    {property_images.length > 0 ? (
+                      <img
+                        src={`${BASE_IMAGE_URL}/storage/${property_images[0].image}`}
+                        alt="property"
+                        className="h-[15rem] object-cover"
+                      />
+                    ) : (
+                      <img src={DEFAULT_IMAGE} alt="property" className="h-[15rem] object-cover" />
+                    )}
                   </div>
-                );
-              })}
-          </div>
-          <div className="mt-10">
-            <Pagination
-              count={totalPage}
-              page={currentPage}
-              onChange={handlePageChange}
-              shape="rounded"
-              size="large"
-              color="primary"
-              showFirstButton
-              showLastButton
-            />
-          </div>
-        </>
-      )}
+                  <div className="text">
+                    <div className="category flex">
+                      <span
+                        style={{
+                          background: badge === "FOR_SALE" ? "#25b5791a" : "#ff98001a",
+                          color: badge === "FOR_SALE" ? "#25b579" : "#ff9800",
+                        }}
+                      >
+                        {badge}
+                      </span>
+                      <i className="fa fa-heart"></i>
+                    </div>
+                    <h4>{property_type.name}</h4>
+                    <p className="">
+                      <i className="fa fa-location-dot"></i>
+                      <span>{property_location?.city?.name}</span>
+                    </p>
+                  </div>
+                  <div className="button flex">
+                    <div>
+                      <button className="btn2">$ {price}</button>
+                    </div>
+                    <span>{property_type.name}</span>
+                  </div>
+                </Link>
+              </div>
+            );
+          })}
+      </div>
+      <div className="mt-10">
+        <Pagination
+          count={totalPage}
+          page={currentPage}
+          onChange={handlePageChange}
+          shape="rounded"
+          size="large"
+          color="primary"
+          showFirstButton
+          showLastButton
+        />
+      </div>
     </div>
   );
 };
