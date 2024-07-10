@@ -104,6 +104,24 @@ const DetailSkelaton = () => {
                 <Skeleton variant="rectangular" width={100} height={30} />
               </div>
             </div>
+
+            {/* Location */}
+            <div>
+              <h3 className="my-8 font-bold text-lg">Property Location</h3>
+                <Skeleton variant="rectangular" width="100%" height={250} />
+            </div>
+
+            {/* Review */}
+            <div>
+              <h3 className="my-8 font-bold text-lg">Review Property</h3>
+                <div className="flex flex-col gap-3">
+                  <Skeleton variant="rectangular" width="100%" height={70} />
+                  <Skeleton variant="rectangular" width="100%" height={30} />
+                </div>
+                <div className="mt-5">
+                  <Skeleton variant="rectangular" width={100} height={30} />
+                </div>
+            </div>
           </div>
         </div>
       </div>

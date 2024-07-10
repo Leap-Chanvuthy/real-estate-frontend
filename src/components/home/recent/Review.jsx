@@ -1,22 +1,22 @@
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import TextField from "@mui/material/TextField";
-import Alert from "@mui/material/Alert";
-import { CircularProgress, Button } from "@mui/material";
+import { CircularProgress, Button, Snackbar } from "@mui/material";
 import axios from "axios";
 import { useState } from "react";
 import { useParams } from "react-router-dom";
+import { fetchPropertiesStart, fetchPropertiesSuccess, fetchPropertiesFailure } from "../../../redux/slice/propertiesSlice";
+import { BASE_URL } from "../../../constants/const";
 
 const Review = () => {
   const { currentUser } = useSelector((state) => state.auth);
-  const {id} = useParams();
+  const { id } = useParams();
   const authorisation = currentUser?.authorisation;
+  const dispatch = useDispatch();
 
   const [values, setValues] = useState({
-    review: " ",
+    review: "",
     rating: null,
   });
-
-  console.log(values);
 
   const handleChange = (e) => {
     const key = e.target.id;
@@ -25,11 +25,21 @@ const Review = () => {
   };
 
   const [loading, setLoading] = useState(false);
-  const [success, setSuccess] = useState(false);
   const [errorArray, setErrorArray] = useState([]);
+  const [openSuccessSnackbar, setOpenSuccessSnackbar] = useState(false);
+  const [openErrorSnackbar, setOpenErrorSnackbar] = useState(false);
+
+  const handleCloseSnackbar = () => {
+    setOpenSuccessSnackbar(false);
+    setOpenErrorSnackbar(false);
+  };
 
   const createReview = async (e) => {
     e.preventDefault();
+    if (!authorisation?.token) {
+      setOpenErrorSnackbar(true);
+      return;
+    }
     try {
       setLoading(true);
       const response = await axios.post(
@@ -41,34 +51,33 @@ const Review = () => {
       );
       console.log(response);
 
-        setSuccess(true);
-        setTimeout(() => {
-          setSuccess(false);
-        }, 3000);
-        setValues({
-          review: "",
-          rating: "",
-        });
-  
+      // Fetch updated list of reviews after successful creation
+      dispatch(fetchPropertiesStart());
+      const updatedResponse = await axios.get(`${BASE_URL}/properties/${id}`);
+      if (updatedResponse.status === 200) {
+        dispatch(fetchPropertiesSuccess(updatedResponse.data));
+        setOpenSuccessSnackbar(true); // Show success toast
+      } else {
+        throw new Error("Failed to fetch updated properties");
+      }
+
+      setValues({
+        review: "",
+        rating: "",
+      });
+
       setLoading(false);
     } catch (error) {
       setErrorArray(error.response.data.errors);
       console.log(error);
       setLoading(false);
-      setSuccess(false);
+      setOpenErrorSnackbar(true); // Show error toast
     }
   };
 
   return (
     <div>
-      <div className="m-10">
-        <h3 className="text-xl font-bold">Review</h3>
-        <p className="capitalize">Give us feedback to improve our service</p>
-      </div>
-      <form className="m-5" onSubmit={createReview}>
-        {success &&         <Alert severity="success" color="success" className="w-full my-5">
-            Successfully !
-          </Alert>}
+      <form onSubmit={createReview}>
         <div className="flex flex-col gap-3">
           <TextField
             fullWidth
@@ -94,10 +103,17 @@ const Review = () => {
         </div>
         <div className="mt-2">
           <Button variant="outlined" size="medium" type="submit">
-          {loading ? <CircularProgress size={25} /> : "Review"}
+            {loading ? <CircularProgress size={25} /> : "Review"}
           </Button>
         </div>
       </form>
+      <Snackbar
+        open={openSuccessSnackbar || openErrorSnackbar} // Show toast for success or error
+        autoHideDuration={3000}
+        onClose={handleCloseSnackbar}
+        message={openSuccessSnackbar ? "Review submitted successfully!" : "Failed to submit review."}
+        anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+      />
     </div>
   );
 };

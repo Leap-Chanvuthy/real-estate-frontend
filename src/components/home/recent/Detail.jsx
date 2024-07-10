@@ -36,7 +36,7 @@ const Detail = () => {
   const { id } = useParams();
   const { properties, error, loading } = useSelector((state) => state.properties);
   const {currentUser} = useSelector((state) => state.auth);
-  console.log(properties)
+  console.log(currentUser)
   const dispatch = useDispatch();
   const [activeTab, setActiveTab] = useState(0);
 
@@ -60,9 +60,9 @@ const Detail = () => {
 
   const property = properties.data?.property;
   const relatedProperties = properties.data?.related_properties;
-  const reviews = properties.data?.reviews;
+  const reviews = properties?.data?.reviews;
   const images = properties.data?.property?.property_images;
-  console.log(images);
+  console.log(reviews);
 
   if (error) {
     return <div>Error: {error}</div>;
@@ -146,52 +146,89 @@ const Detail = () => {
                   {/* RIGHT */}
                   <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-10">
                     <div>
-                      <h3 className="text-lg font-semibold text-gray-700">Location</h3>
+                      <h3 className="text-lg font-semibold text-gray-700">
+                        Location
+                      </h3>
                       <p className="text-gray-600 mt-2">
                         <div className="border-2 border-gray-300 rounded-full p-2 mr-2 inline-flex">
                           <FaMapMarkerAlt className="text-md text-red-500" />
                         </div>
-                        {property.property_location?.city?.name}, {property.property_location?.district?.name}, {property.property_location?.village?.name}
+                        {property.property_location?.city?.name},{" "}
+                        {property.property_location?.district?.name},{" "}
+                        {property.property_location?.village?.name}
                       </p>
                     </div>
                     <div>
-                      <h3 className="text-lg font-semibold text-gray-700">Area</h3>
+                      <h3 className="text-lg font-semibold text-gray-700">
+                        Area
+                      </h3>
                       <p className="text-gray-600 mt-2">
                         <div className="border-2 border-gray-300 rounded-full p-2 mr-2 inline-flex">
                           <TbChartArea className="text-md text-gray-700" />
                         </div>
-                        {property.area || <p className="text-red-300">Not Available</p>}
+                        {property.area || (
+                          <p className="text-red-300">Not Available</p>
+                        )}
                       </p>
                     </div>
                     <div>
-                      <h3 className="text-lg font-semibold text-gray-700">License Type</h3>
+                      <h3 className="text-lg font-semibold text-gray-700">
+                        License Type
+                      </h3>
                       <p className="text-gray-600 mt-2">
                         <div className="border-2 border-gray-300 rounded-full p-2 mr-2 inline-flex">
                           <IoDocumentTextOutline className="text-md text-gray-700" />
                         </div>
-                        {property.license || <span className="text-red-300">Not Available</span>}
+                        {property.license || (
+                          <span className="text-red-300">Not Available</span>
+                        )}
                       </p>
                     </div>
                     <div>
-                      <h3 className="text-lg font-semibold text-gray-700">Direction Facing</h3>
+                      <h3 className="text-lg font-semibold text-gray-700">
+                        Direction Facing
+                      </h3>
                       <p className="text-gray-600 mt-2">
                         <div className="border-2 border-gray-300 rounded-full p-2 mr-2 inline-flex">
-                          <GiDirectionSign  className="text-md text-gray-700" />
+                          <GiDirectionSign className="text-md text-gray-700" />
                         </div>
-                        {property.facing || <span className="text-red-300">Not Available</span>}
+                        {property.facing || (
+                          <span className="text-red-300">Not Available</span>
+                        )}
                       </p>
                     </div>
                     <div>
-                      <h3 className="text-lg font-semibold text-gray-700">Land Type</h3>
-                      <p className="text-gray-600 mt-2">{property.land_type || <span className="text-red-300">Not Available</span>}</p>
+                      <h3 className="text-lg font-semibold text-gray-700">
+                        Land Type
+                      </h3>
+                      <p className="text-gray-600 mt-2">
+                        {property.land_type || (
+                          <span className="text-red-300">Not Available</span>
+                        )}
+                      </p>
                     </div>
                     <div>
-                      <h3 className="text-lg font-semibold text-gray-700">Price</h3>
-                      <p className="text-gray-600 mt-2">$ {property.price || <span className="text-red-300">Price Not Available</span>}</p>
+                      <h3 className="text-lg font-semibold text-gray-700">
+                        Price
+                      </h3>
+                      <p className="text-gray-600 mt-2">
+                        ${" "}
+                        {property.price || (
+                          <span className="text-red-300">
+                            Price Not Available
+                          </span>
+                        )}
+                      </p>
                     </div>
                     <div>
-                      <h3 className="text-lg font-semibold text-gray-700">Sold Type</h3>
-                      <p className="text-gray-600 mt-2">{property.sold_type || <span className="text-red-300">Not Available</span>}</p>
+                      <h3 className="text-lg font-semibold text-gray-700">
+                        Sold Type
+                      </h3>
+                      <p className="text-gray-600 mt-2">
+                        {property.sold_type || (
+                          <span className="text-red-300">Not Available</span>
+                        )}
+                      </p>
                     </div>
                   </div>
                 </div>
@@ -255,8 +292,19 @@ const Detail = () => {
               {/* Google Map */}
               <div>
                 <h3 className="my-8 font-bold text-lg">Property Location</h3>
-                <Location latitude={property.property_location?.latitude} longitude={property.property_location?.longitude} />
+                <Location
+                  latitude={property.property_location?.latitude}
+                  longitude={property.property_location?.longitude}
+                />
               </div>
+
+              {/* Review Form */}
+              <div>
+                <h2 className="text-lg font-bold mt-8">Review Property</h2>
+                <p className="capitalize">Share your tought about this property</p>
+                <Review property_id={{ id }} />
+              </div>
+
             </div>
           )}
 
@@ -275,8 +323,8 @@ const Detail = () => {
                       <img
                         src={
                           relatedProperty.property_images.length > 0
-                            ? `${BASE_IMAGE_URL}/storage/${relatedProperty.property_images[0].image}`
-                            : DEFAULT_IMAGE
+                            ? `${relatedProperty.property_images[0].image}`
+                            : BASE_IMAGE_URL
                         }
                         alt="Property"
                         className="w-full h-48 object-cover"
@@ -303,31 +351,14 @@ const Detail = () => {
             </div>
           )}
 
-
-            {currentUser ?
-            <div>
-              {activeTab === 2 && (
-                <div className="mt-6">
-                  <h2 className="text-xl font-semibold text-gray-700">Reviews</h2>
-                  <div className="w-full mx-auto overflow-hidden">
-                    <Review property_id={{ id }} />
-                  </div>
-                  <hr />
-                  <div className="w-full mx-auto shadow-lg rounded-lg overflow-hidden">
-                    <h2 className="text-xl font-semibold text-gray-700 mx-10 mt-5">
-                      Reviews
-                    </h2>
-                    <ReviewList review={reviews} property_id={{ id }} />
-                  </div>
-                </div>
-              )}
+          {activeTab === 2 && (
+            <div className="mt-6">
+              <h2 className="text-xl font-semibold text-gray-700">Reviews</h2>
+              <div className="w-full mx-auto shadow-lg rounded-lg overflow-hidden">
+                <ReviewList review={reviews} property_id={{ id }} />
+              </div>
             </div>
-            : 
-            <div>
-              {activeTab === 2 && (<h3 className="text-center my-10 text-lg font-medium text-red-300">Please Sign In To Post A Review</h3> )}
-            </div>
-            }
-
+          )}
 
         </div>
       </div>
