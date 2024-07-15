@@ -301,7 +301,6 @@ const Detail = () => {
               {/* Review Form */}
               <div>
                 <h2 className="text-lg font-bold mt-8">Review Property</h2>
-                <p className="capitalize">Share your tought about this property</p>
                 <Review property_id={{ id }} />
               </div>
 
@@ -354,7 +353,7 @@ const Detail = () => {
           {activeTab === 2 && (
             <div className="mt-6">
               <h2 className="text-xl font-semibold text-gray-700">Reviews</h2>
-              <div className="w-full mx-auto shadow-lg rounded-lg overflow-hidden">
+              <div>
                 <ReviewList review={reviews} property_id={{ id }} />
               </div>
             </div>

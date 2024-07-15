@@ -8,7 +8,7 @@ import { useSelector, useDispatch } from "react-redux";
 import axios from "axios";
 import { BASE_URL } from "../../../constants/const";
 import { useParams } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { fetchPropertiesStart, fetchPropertiesSuccess, fetchPropertiesFailure } from "../../../redux/slice/propertiesSlice";
 
 const ReviewList = ({ review }) => {
@@ -20,14 +20,30 @@ const ReviewList = ({ review }) => {
   const [open, setOpen] = useState({});
   const [editMode, setEditMode] = useState({});
   const [editText, setEditText] = useState({});
-  const [editRating, setEditRating] = useState({}); // State for edited rating
+  const [editRating, setEditRating] = useState({});
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
   const [reviewToDelete, setReviewToDelete] = useState(null);
   const [toastOpen, setToastOpen] = useState(false);
   const [toastMessage, setToastMessage] = useState("");
   const [toastSeverity, setToastSeverity] = useState("success");
-
   const propertiesLoading = useSelector((state) => state.properties.loading);
+
+  useEffect(() => {
+    if (review) {
+      // Initialize editMode, editText, and editRating for each review
+      const initialModes = {};
+      const initialTexts = {};
+      const initialRatings = {};
+      review.forEach((rev) => {
+        initialModes[rev.id] = false;
+        initialTexts[rev.id] = rev.review;
+        initialRatings[rev.id] = rev.rating;
+      });
+      setEditMode(initialModes);
+      setEditText(initialTexts);
+      setEditRating(initialRatings);
+    }
+  }, [review]);
 
   const handleToggle = (reviewId) => {
     setOpen((prev) => ({ ...prev, [reviewId]: !prev[reviewId] }));
@@ -122,6 +138,7 @@ const ReviewList = ({ review }) => {
     }
     setToastOpen(false);
   };
+
   return (
     <div>
       {review &&
@@ -140,7 +157,7 @@ const ReviewList = ({ review }) => {
                         {!editMode[rev.id] ? (
                           <FaRegEdit
                             className="font-bold cursor-pointer"
-                            onClick={() => toggleEditMode(rev.id, rev.review)}
+                            onClick={() => toggleEditMode(rev.id, rev.review, rev.rating)} // Pass current review text and rating
                           />
                         ) : (
                           <>
@@ -176,14 +193,14 @@ const ReviewList = ({ review }) => {
                     value={editText[rev.id] || ""}
                     onChange={(event) => handleEditTextChange(event, rev.id)}
                   />
-                <TextField
-                  required
-                  label="Rating"
-                  value={editRating[rev.id] || ""}
-                  type="number"
-                  onChange={(e) => handleRatingChange(e.target.value, rev.id)}
-                />
-                </div>  
+                  <TextField
+                    required
+                    label="Rating"
+                    value={editRating[rev.id] || ""}
+                    type="number"
+                    onChange={(e) => handleRatingChange(e.target.value, rev.id)}
+                  />
+                </div>
               )}
             </div>
           </div>
@@ -207,7 +224,12 @@ const ReviewList = ({ review }) => {
       </Dialog>
 
       {/* Toast Notification */}
-      <Snackbar open={toastOpen && !propertiesLoading} autoHideDuration={3000} onClose={handleCloseToast} anchorOrigin={{ vertical: "bottom", horizontal: "center" }}>
+      <Snackbar
+        open={toastOpen && !propertiesLoading}
+        autoHideDuration={3000}
+        onClose={handleCloseToast}
+        anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+      >
         <MuiAlert elevation={6} variant="filled" severity={toastSeverity} onClose={handleCloseToast}>
           {toastMessage}
         </MuiAlert>
@@ -217,3 +239,4 @@ const ReviewList = ({ review }) => {
 };
 
 export default ReviewList;
+
