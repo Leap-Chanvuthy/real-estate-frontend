@@ -28,22 +28,24 @@ const Review = () => {
   const [errorArray, setErrorArray] = useState([]);
   const [openSuccessSnackbar, setOpenSuccessSnackbar] = useState(false);
   const [openErrorSnackbar, setOpenErrorSnackbar] = useState(false);
+  const [loginRequiredSnackbar, setLoginRequiredSnackbar] = useState(false); // New state for login required toast
 
   const handleCloseSnackbar = () => {
     setOpenSuccessSnackbar(false);
     setOpenErrorSnackbar(false);
+    setLoginRequiredSnackbar(false);
   };
 
   const createReview = async (e) => {
     e.preventDefault();
     if (!authorisation?.token) {
-      setOpenErrorSnackbar(true);
+      setLoginRequiredSnackbar(true); // Show login required toast
       return;
     }
     try {
       setLoading(true);
       const response = await axios.post(
-        `http://127.0.0.1:8000/api/properties/${id}/reviews`,
+        `${BASE_URL}/properties/${id}/reviews`,
         values,
         {
           headers: { Authorization: `Bearer ${authorisation.token}` },
@@ -108,10 +110,16 @@ const Review = () => {
         </div>
       </form>
       <Snackbar
-        open={openSuccessSnackbar || openErrorSnackbar} // Show toast for success or error
+        open={openSuccessSnackbar || openErrorSnackbar || loginRequiredSnackbar} // Show toast for success, error, or login required
         autoHideDuration={3000}
         onClose={handleCloseSnackbar}
-        message={openSuccessSnackbar ? "Review submitted successfully!" : "Failed to submit review."}
+        message={
+          openSuccessSnackbar
+            ? "Review submitted successfully!"
+            : openErrorSnackbar
+            ? "Failed to submit review."
+            : "Login required to submit a review."
+        }
         anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
       />
     </div>

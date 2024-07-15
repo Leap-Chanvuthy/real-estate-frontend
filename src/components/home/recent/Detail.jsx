@@ -73,9 +73,6 @@ const Detail = () => {
       <DetailSkelaton />
     );
   }
-  
-  
-
   if (!property) {
     return <div>Property not found</div>;
   }
