@@ -6,14 +6,14 @@ import authReducer from './slice/authSlice';
 import propertiesReducer from './slice/propertiesSlice';
 import propertyTypesReducer from './slice/propertyTypesSlice';
 import agentsReducer from './slice/agentsSlice';
+import favouritesReducer from './slice/favouritesSlice';
 
 import { combineReducers } from 'redux';
-
 
 const persistConfig = {
   key: 'root',
   storage,
-  whitelist: ['auth'],
+  whitelist: ['auth', 'favourites'],
 };
 
 const rootReducer = combineReducers({
@@ -21,11 +21,11 @@ const rootReducer = combineReducers({
   properties: propertiesReducer,
   propertyTypes: propertyTypesReducer,
   agents: agentsReducer,
+  favourites: favouritesReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 export const store = configureStore({ reducer: persistedReducer }); 
 
-// Move exports to the end
 export const persistor = persistStore(store);
