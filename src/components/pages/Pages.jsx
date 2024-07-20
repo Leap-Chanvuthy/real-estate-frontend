@@ -1,8 +1,8 @@
 import React from "react";
 import Header from "../common/header/Header";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "../home/Home";
-import Detail from '../home/recent/Detail'
+import Detail from '../home/recent/Detail';
 import Footer from "../common/footer/Footer";
 import About from "../about/About";
 import Pricing from "../pricing/Pricing";
@@ -12,35 +12,30 @@ import Contact from "../contact/Contact";
 import Register from "../auth/Register";
 import Login from "../auth/Login";
 import ProtectedRoute from "../auth/ProtectedRoute";
-import { useSelector } from "react-redux";
 import Profile from "../profile/Profile";
 import Verify2FA from "../profile/components/Verify2FA";
 import FavoritesList from "../favourite/FavouritesList";
 
 const Pages = () => {
-  const { currentUser } = useSelector((state) => state.auth);
-  const user = currentUser?.user;
-  console.log(currentUser)
-
   return (
-    <Router>
+    <BrowserRouter>
       <Header />
-      <Switch>
-        <Route exact path="/" component={Home} />
-        <Route exact path="/property/:id" component={Detail} />
-        <Route exact path="/about" component={About} />
-        <Route exact path="/services" component={Services} />
-        <Route exact path="/property" component={Blog} />
-        <Route exact path="/pricing" component={Pricing} />
-        <Route exact path="/contact" component={Contact} />
-        <Route exact path="/profile" component={Profile} />
-        <Route exact path="/verify2fa" component={Verify2FA}/>
-        <Route exact path="/favourites" component={FavoritesList} />
-        <ProtectedRoute exact path="/register" component={Register} />
-        <ProtectedRoute exact path="/login" component={Login} />
-      </Switch>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/property/:id" element={<Detail />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/services" element={<Services />} />
+        <Route path="/property" element={<Blog />} />
+        <Route path="/pricing" element={<Pricing />} />
+        <Route path="/contact" element={<Contact />} />
+        <Route path="/profile" element={<Profile />} />
+        <Route path="/verify2fa" element={<Verify2FA />} />
+        <Route path="/favourites" element={<FavoritesList />} />
+        <Route path="/register" element={<ProtectedRoute element={<Register />} />} />
+        <Route path="/login" element={<ProtectedRoute element={<Login />} />} />
+      </Routes>
       <Footer />
-    </Router>
+    </BrowserRouter>
   );
 };
 

@@ -97,14 +97,12 @@ import Button from "@mui/material/Button";
 import axios from "axios";
 import { Alert } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
-import { signInSuccess, signInFailure } from "../../../redux/slice/authSlice";
-import { useHistory } from "react-router-dom";
 import { BASE_URL } from "../../../constants/const";
+import { signInSuccess } from "../../../redux/slice/authSlice";
 
 const Verify2FA = () => {
   const { currentUser } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
-  const history = useHistory();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState(false);
@@ -139,8 +137,7 @@ const Verify2FA = () => {
         setValues({ one_time_password: "" });
         setSuccess(true);
 
-        // Redirect to home page or any desired page upon successful verification
-        history.push('/');
+        window.location.href = '/';
       }
     } catch (error) {
       console.error("Error verifying 2FA code:", error);
