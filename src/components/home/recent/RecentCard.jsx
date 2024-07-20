@@ -82,7 +82,8 @@ const RecentCard = () => {
                     )}
                   </div>
                   <div className="text">
-                    <div className="category flex">
+                    <h4 className="font-bold my-3 text-lg">{property_type.name}</h4>
+                    <div className="category flexs">
                       <span
                         style={{
                           background: badge === "FOR_SALE" ? "#25b5791a" : "#ff98001a",
@@ -91,11 +92,10 @@ const RecentCard = () => {
                       >
                         {badge}
                       </span>
-                      <i className="fa fa-heart"></i>
+                      {/* <i className="fa fa-heart my-3"></i> */}
                     </div>
-                    <h4>{property_type.name}</h4>
-                    <p className="">
-                      <i className="fa fa-location-dot"></i>
+                    <p className="flex items-center gap-3">
+                      <i className="fa fa-location-dot text-red-500 "></i>
                       <span>{property_location?.city?.name}</span>
                     </p>
                   </div>
@@ -103,7 +103,6 @@ const RecentCard = () => {
                     <div>
                       <button className="btn2">$ {price}</button>
                     </div>
-                    <span>{property_type.name}</span>
                   </div>
                 </Link>
               </div>

@@ -82,6 +82,7 @@ const Header = () => {
   const { pathname } = useLocation();
   const { currentUser } = useSelector((state) => state.auth);
   const {items} = useSelector((state) => state.favourites);
+  const count = items.length;
   const user = currentUser?.user;
 
   return (
@@ -107,7 +108,7 @@ const Header = () => {
               <div className="relative inline-flex items-center justify-center border-2 border-green-200 p-2 rounded-full bg-white">
                 <BsBookmarkHeartFill className="text-green-400 text-2xl" />
                 <p className="absolute top-0 right-0 translate-x-1/2 translate-y-1/2 bg-red-500 text-white text-xs font-bold px-1 rounded-full">
-                    {items.length}
+                    {count}
                 </p>
               </div>
             </Link>
