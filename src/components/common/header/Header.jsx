@@ -76,6 +76,7 @@ import Avatar from '@mui/material/Avatar';
 import { FaBars, FaTimes } from 'react-icons/fa'; // Using React Icons for better consistency
 import { nav } from "../../data/Data";
 import { BsBookmarkHeartFill } from "react-icons/bs";
+import { Button } from "@mui/material";
 
 const Header = () => {
   const [navListOpen, setNavListOpen] = useState(false);
@@ -122,10 +123,9 @@ const Header = () => {
             </Link>
           ) : (
             <div className="flex items-center gap-4">
-              <Link to="/register" className="text-blue-500 hover:text-blue-700">Sign In</Link>
-              <button className="btn1">
-                <span>My List (2)</span>
-              </button>
+              <Link to="/register" className="text-blue-500 hover:text-blue-700">
+                <Button variant="outlined" >Sign In</Button>
+              </Link>
             </div>
           )}
 

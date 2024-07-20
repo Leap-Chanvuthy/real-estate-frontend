@@ -31,8 +31,8 @@ const Pages = () => {
         <Route path="/profile" element={<Profile />} />
         <Route path="/verify2fa" element={<Verify2FA />} />
         <Route path="/favourites" element={<FavoritesList />} />
-        <Route path="/register" element={<ProtectedRoute element={<Register />} />} />
-        <Route path="/login" element={<ProtectedRoute element={<Login />} />} />
+        <Route path="/register" element={<Register/>} />
+        <Route path="/login" element={<Login />} />
       </Routes>
       <Footer />
     </BrowserRouter>

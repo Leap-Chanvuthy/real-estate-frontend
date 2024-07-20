@@ -43,7 +43,7 @@ const Location = ({ latitude, longitude }) => {
         <GoogleMap
           mapContainerStyle={{ height: "100%", width: "100%" }}
           center={center}
-          zoom={10} // Adjust zoom level as per your requirement
+          zoom={3} // Adjust zoom level as per your requirement
         >
           <Marker position={center} />
         </GoogleMap>
