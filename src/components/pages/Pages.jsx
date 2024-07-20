@@ -15,6 +15,7 @@ import ProtectedRoute from "../auth/ProtectedRoute";
 import { useSelector } from "react-redux";
 import Profile from "../profile/Profile";
 import Verify2FA from "../profile/components/Verify2FA";
+import FavoritesList from "../favourite/FavouritesList";
 
 const Pages = () => {
   const { currentUser } = useSelector((state) => state.auth);
@@ -34,6 +35,7 @@ const Pages = () => {
         <Route exact path="/contact" component={Contact} />
         <Route exact path="/profile" component={Profile} />
         <Route exact path="/verify2fa" component={Verify2FA}/>
+        <Route exact path="/favourites" component={FavoritesList} />
         <ProtectedRoute exact path="/register" component={Register} />
         <ProtectedRoute exact path="/login" component={Login} />
       </Switch>

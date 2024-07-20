@@ -1,65 +1,129 @@
+// import React, { useState } from "react";
+// import "./header.css";
+// import { nav } from "../../data/Data";
+// import { Link, useLocation } from "react-router-dom";
+// import { useSelector } from "react-redux";
+// import Avatar from '@mui/material/Avatar';
+
+// const Header = () => {
+//   const [navList, setNavList] = useState(false);
+//   const { pathname } = useLocation();
+//   const { currentUser } = useSelector((state) => state.auth);
+
+//   const user = currentUser?.user;
+
+//   return (
+//     <header>
+//       <div className='container flex'>
+//         <div className='logo'>
+//           {/* <img src='./images/logo.png' alt='Logo' /> */}
+//           My Estate
+//         </div>
+//         <div className='nav'>
+//           <ul className={navList ? "small" : "flex"}>
+//             {nav.map((list, index) => (
+//               <li key={index}>
+//                 <Link to={list.path} className={pathname === list.path ? "text-green-600" : ""}>
+//                   {list.text}
+//                 </Link>
+//               </li>
+//             ))}
+//           </ul>
+//         </div>
+//         {user ? 
+//         <div className="hidden lg:md:flex">
+//           <Link to="/profile">
+//             <Avatar alt="Remy Sharp" src={`${user.profile_image == null ? '/static/images/avatar/1.jpg' : user.profile_image}`} />
+//           </Link>
+//         </div>
+//         :
+//         <div className='button flex'>
+//           <h4>
+//             <span>2</span> My List
+//           </h4>
+//           <button className='btn1'>
+//             <i className='fa fa-sign-out'></i>
+//             <Link to='/register'>Sign In</Link>
+//           </button>
+//         </div>
+//         }
+
+//         <div className='toggle'>
+//           <div className="flex gap-3">
+//             {user ?
+//               <Link to="/profile">
+//                 <Avatar alt="Remy Sharp" src={`${user.profile_image == null ? '/static/images/avatar/1.jpg' : user.profile_image}`} />
+//               </Link>
+//               :<></>
+//             }
+//             <button onClick={() => setNavList(!navList)}>
+//               {navList ? <i className='fa fa-times'></i> : <i className='fa fa-bars'></i>}
+//             </button>
+//           </div>
+//         </div>
+//       </div>
+//     </header>
+//   );
+// }
+
+// export default Header;
+
+
 import React, { useState } from "react";
-import "./header.css";
-import { nav } from "../../data/Data";
 import { Link, useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
 import Avatar from '@mui/material/Avatar';
+import { FaBars, FaTimes } from 'react-icons/fa'; // Using React Icons for better consistency
+import { nav } from "../../data/Data";
 
 const Header = () => {
-  const [navList, setNavList] = useState(false);
+  const [navListOpen, setNavListOpen] = useState(false);
   const { pathname } = useLocation();
   const { currentUser } = useSelector((state) => state.auth);
-
   const user = currentUser?.user;
 
   return (
-    <header>
-      <div className='container flex'>
-        <div className='logo'>
-          {/* <img src='./images/logo.png' alt='Logo' /> */}
+    <header className="bg-white shadow-md">
+      <div className="container mx-auto flex items-center justify-between p-4">
+        <div className="logo text-2xl font-bold">
           My Estate
         </div>
-        <div className='nav'>
-          <ul className={navList ? "small" : "flex"}>
-            {nav.map((list, index) => (
+
+        <nav className={`nav ${navListOpen ? "block" : "hidden"} lg:flex`}>
+          <ul className="flex gap-4 font-medium">
+            {nav.map((item, index) => (
               <li key={index}>
-                <Link to={list.path} className={pathname === list.path ? "text-green-600" : ""}>
-                  {list.text}
+                <Link
+                  to={item.path}
+                  className={`text-lg ${pathname === item.path ? "text-green-600" : "text-gray-800"} hover:text-green-600`}
+                >
+                  {item.text}
                 </Link>
               </li>
             ))}
           </ul>
-        </div>
-        {user ? 
-        <div className="hidden lg:md:flex">
-          <Link to="/profile">
-            <Avatar alt="Remy Sharp" src={`${user.profile_image == null ? '/static/images/avatar/1.jpg' : user.profile_image}`} />
-          </Link>
-        </div>
-        :
-        <div className='button flex'>
-          <h4>
-            <span>2</span> My List
-          </h4>
-          <button className='btn1'>
-            <i className='fa fa-sign-out'></i>
-            <Link to='/register'>Sign In</Link>
-          </button>
-        </div>
-        }
+        </nav>
 
-        <div className='toggle'>
-          <div className="flex gap-3">
-            {user ?
-              <Link to="/profile">
-                <Avatar alt="Remy Sharp" src={`${user.profile_image == null ? '/static/images/avatar/1.jpg' : user.profile_image}`} />
-              </Link>
-              :<></>
-            }
-            <button onClick={() => setNavList(!navList)}>
-              {navList ? <i className='fa fa-times'></i> : <i className='fa fa-bars'></i>}
-            </button>
-          </div>
+        <div className="flex items-center gap-4">
+          {user ? (
+            <Link to="/profile" className="hidden lg:flex">
+              <Avatar alt={user.name} src={user.profile_image || '/static/images/avatar/1.jpg'} />
+            </Link>
+          ) : (
+            <div className="flex items-center gap-4">
+              <Link to="/register" className="text-blue-500 hover:text-blue-700">Sign In</Link>
+              <button className="btn1">
+                <span>My List (2)</span>
+              </button>
+            </div>
+          )}
+
+          <button
+            className="lg:hidden text-2xl"
+            onClick={() => setNavListOpen(!navListOpen)}
+          >
+            {navListOpen ? <FaTimes /> : <FaBars />}
+          </button>
         </div>
       </div>
     </header>

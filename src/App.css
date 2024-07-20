@@ -15,7 +15,7 @@ body {
   max-width: 80%;
   margin: auto;
 }
-.flex {
+.flexs {
   display: flex;
   justify-content: space-between;
   align-items: center;
