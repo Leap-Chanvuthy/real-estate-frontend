@@ -13,8 +13,8 @@ import { fetchPropertiesStart, fetchPropertiesSuccess, fetchPropertiesFailure } 
 
 const ReviewList = ({ review }) => {
   const { currentUser } = useSelector((state) => state.auth);
-  const userId = currentUser.user.id;
-  const token = currentUser.authorisation.token;
+  const userId = currentUser?.user?.id;
+  const token = currentUser?.authorisation?.token;
   const { id } = useParams();
   const dispatch = useDispatch();
   const [open, setOpen] = useState({});
@@ -50,6 +50,12 @@ const ReviewList = ({ review }) => {
   };
 
   const toggleEditMode = (reviewId, initialText, initialRating) => {
+    if (!currentUser) {
+      setToastSeverity("error");
+      setToastMessage("You need to be logged in to edit reviews.");
+      setToastOpen(true);
+      return;
+    }
     setEditMode((prev) => ({ ...prev, [reviewId]: !prev[reviewId] }));
     if (!editMode[reviewId]) {
       setEditText((prev) => ({ ...prev, [reviewId]: initialText }));
@@ -66,6 +72,12 @@ const ReviewList = ({ review }) => {
   };
 
   const handleUpdate = async (reviewId) => {
+    if (!currentUser) {
+      setToastSeverity("error");
+      setToastMessage("You need to be logged in to update reviews.");
+      setToastOpen(true);
+      return;
+    }
     try {
       const response = await axios.patch(
         `${BASE_URL}/properties/${id}/reviews/${reviewId}`,
@@ -94,6 +106,12 @@ const ReviewList = ({ review }) => {
   };
 
   const handleDeleteClick = (reviewId) => {
+    if (!currentUser) {
+      setToastSeverity("error");
+      setToastMessage("You need to be logged in to delete reviews.");
+      setToastOpen(true);
+      return;
+    }
     setReviewToDelete(reviewId);
     setDeleteDialogOpen(true);
   };
@@ -239,4 +257,3 @@ const ReviewList = ({ review }) => {
 };
 
 export default ReviewList;
-
