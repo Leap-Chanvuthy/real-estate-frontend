@@ -75,11 +75,13 @@ import { useSelector } from "react-redux";
 import Avatar from '@mui/material/Avatar';
 import { FaBars, FaTimes } from 'react-icons/fa'; // Using React Icons for better consistency
 import { nav } from "../../data/Data";
+import { BsBookmarkHeartFill } from "react-icons/bs";
 
 const Header = () => {
   const [navListOpen, setNavListOpen] = useState(false);
   const { pathname } = useLocation();
   const { currentUser } = useSelector((state) => state.auth);
+  const {items} = useSelector((state) => state.favourites);
   const user = currentUser?.user;
 
   return (
@@ -90,7 +92,7 @@ const Header = () => {
         </div>
 
         <nav className={`nav ${navListOpen ? "block" : "hidden"} lg:flex`}>
-          <ul className="flex gap-4 font-medium">
+          <ul className="flex items-center gap-7 font-medium">
             {nav.map((item, index) => (
               <li key={index}>
                 <Link
@@ -101,6 +103,14 @@ const Header = () => {
                 </Link>
               </li>
             ))}
+            <Link to="/favourites">
+              <div className="relative inline-flex items-center justify-center border-2 border-green-200 p-2 rounded-full bg-white">
+                <BsBookmarkHeartFill className="text-green-400 text-2xl" />
+                <p className="absolute top-0 right-0 translate-x-1/2 translate-y-1/2 bg-red-500 text-white text-xs font-bold px-1 rounded-full">
+                    {items.length}
+                </p>
+              </div>
+            </Link>
           </ul>
         </nav>
 
