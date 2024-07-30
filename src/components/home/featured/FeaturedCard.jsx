@@ -4,6 +4,7 @@ import axios from 'axios';
 import { fetchPropertyTypesSuccess, fetchPropertyTypesStart, fetchPropertyTypesFailure } from "../../../redux/slice/propertyTypesSlice"; // Ensure the correct path to your slice
 import {featured} from "../../data/Data";
 import {BASE_URL} from "../../../constants/const";
+import { Skeleton } from "@mui/material";
 
 const FeaturedCard = () => {
     const dispatch = useDispatch();
@@ -23,12 +24,16 @@ const FeaturedCard = () => {
             dispatch(fetchPropertyTypesFailure(error.response?.data?.message || "Failed to fetch property types"));
         }
     };
-
-    if (loading) return <p>Loading...</p>;
     if (error) return <p>Error: {error}</p>;
 
     return (
         <div className='flex overflow-x-auto space-x-4 p-4'>
+            {loading &&         <div className="rounded-sm flex gap-3">
+            <Skeleton variant="rectangular" width={370} height={200} />
+            <Skeleton variant="rectangular" width={370} height={200} />
+            <Skeleton variant="rectangular" width={370} height={200} />
+            <Skeleton variant="rectangular" width={370} height={200} />
+        </div>}
             {propertyTypes.map((item, index) => (
                 <div key={index}
                      className='min-w-[200px] border border-gray-300 p-4 shadow-sm bg-white flex-shrink-0 rounded-lg'>

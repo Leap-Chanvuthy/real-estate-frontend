@@ -3,7 +3,6 @@ import Back from "../common/Back"
 import RecentCard from "../home/recent/RecentCard"
 import "../home/recent/recent.css"
 import img from "../images/about.jpg"
-import SearchFilter from "../common/SearchFilter"
 
 const Blog = () => {
   return (

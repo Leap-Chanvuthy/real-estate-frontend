@@ -99,15 +99,15 @@ const Header = () => {
               <li key={index}>
                 <Link
                   to={item.path}
-                  className={`text-lg ${pathname === item.path ? "text-green-600" : "text-gray-800"} hover:text-green-600`}
+                  className={`text-lg ${pathname === item.path ? "text-[#4287f5]" : "text-gray-800"} hover:text-[#4287f5]`}
                 >
                   {item.text}
                 </Link>
               </li>
             ))}
             <Link to="/favourites">
-              <div className="relative inline-flex items-center justify-center border-2 border-green-200 p-2 rounded-full bg-white">
-                <BsBookmarkHeartFill className="text-green-400 text-2xl" />
+              <div className="relative inline-flex items-center justify-center border-2 border-gray-200 p-2 rounded-full bg-white">
+                <BsBookmarkHeartFill className="text-[#4287f5] text-2xl" />
                 <p className="absolute top-0 right-0 translate-x-1/2 translate-y-1/2 bg-red-500 text-white text-xs font-bold px-1 rounded-full">
                     {count}
                 </p>

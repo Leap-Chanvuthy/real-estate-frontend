@@ -12,7 +12,7 @@ import { BASE_IMAGE_URL, BASE_URL, DEFAULT_IMAGE } from "../../../constants/cons
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import Skeleton from "@mui/material/Skeleton";
-import { TextField , FormControl , InputLabel , Select , MenuItem } from "@mui/material";
+import { TextField , FormControl , InputLabel , Select , MenuItem, Button } from "@mui/material";
 import { fetchPropertyTypesStart , fetchPropertyTypesSuccess , fetchPropertyTypesFailure } from "../../../redux/slice/propertyTypesSlice";
 import { IoBedOutline } from "react-icons/io5";
 import { MdOutlineBathroom } from "react-icons/md";
@@ -368,8 +368,8 @@ const RecentCard = () => {
         </FormControl>
       </div>
       <div className="flex flex-col lg:flex-row gap-3">
-        <button type="submit">Submit</button>
-        <button onClick={clearFilter}>Clear Filter</button>
+        <Button variant="outlined" type="submit">Search</Button>
+        <Button variant="outlined" color="error" onClick={clearFilter}>Clear Filter</Button>
       </div>
     </form>
       </div>
@@ -379,13 +379,14 @@ const RecentCard = () => {
         {Array.isArray(properties.data) &&
           properties.data.map((property, index) => {
             const { price, badge, property_location, property_images, property_type , features } = property;
+            { if (properties.data.length == 0) return (<p>No such properties found.</p>) }
             return (
               <div className="box shadow" key={index}>
                 <Link to={`/property/${property.id}`}>
                   <div className="img">
                     {property_images.length > 0 ? (
                       <img
-                        src={`${BASE_IMAGE_URL}/storage/${property_images[0].image}`}
+                        src={`${BASE_IMAGE_URL}/${property_images[0].image}`}
                         alt="property"
                         className="h-[15rem] object-cover"
                       />
@@ -406,10 +407,13 @@ const RecentCard = () => {
                       </span>
                       {/* <i className="fa fa-heart my-3"></i> */}
                     </div>
-                    <p className="flex items-center gap-3">
-                      <i className="fa fa-location-dot text-red-500 "></i>
-                      <span>{property_location?.city?.name}</span>
-                    </p>
+                    <div className="flex justify-between items-center">
+                      <p className="flex items-center gap-3 my-2">
+                        <i className="fa fa-location-dot text-red-500 "></i>
+                        <span>{property_location?.city?.name}</span>
+                      </p>
+                      <span className="bg-[#2483c7] text-white rounded-md p-2">$ {price}</span>
+                    </div>
                   </div>
                   <div className="flex gap-3 mx-10 my-3">
                     <div className="flex gap-1 items-center">
@@ -429,11 +433,6 @@ const RecentCard = () => {
                         <p>{features.number_of_bathrooms}</p>
                       </div>
                       <p>Bathrooms</p>
-                    </div>
-                  </div>
-                  <div className="button flex">
-                    <div>
-                      <button className="btn2">$ {price}</button>
                     </div>
                   </div>
                 </Link>

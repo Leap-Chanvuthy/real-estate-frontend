@@ -5,7 +5,7 @@ import "./footer.css"
 const Footer = () => {
   return (
     <>
-      <section className='footerContact'>
+      {/* <section className='footerContact'>
         <div className='container'>
           <div className='send '>
             <div className='text'>
@@ -15,7 +15,7 @@ const Footer = () => {
             <div className='bg-white w-[10rem] text-black mt-3 p-4 rounded-full'>Contact Us Today</div>
           </div>
         </div>
-      </section>
+      </section> */}
 
       <footer>
         <div className='container'>

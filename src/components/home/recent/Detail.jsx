@@ -332,6 +332,7 @@ const Detail = () => {
               <div>
                 <h3 className="my-8 font-bold text-lg">Property Location</h3>
                 <Location
+                  property={property}
                   latitude={property.property_location?.latitude}
                   longitude={property.property_location?.longitude}
                 />

@@ -1,6 +1,6 @@
 import React from "react";
 import Header from "../common/header/Header";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 import Home from "../home/Home";
 import Detail from '../home/recent/Detail';
 import Footer from "../common/footer/Footer";
@@ -20,20 +20,20 @@ const Pages = () => {
   return (
     <BrowserRouter>
       <Header />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/property/:id" element={<Detail />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/services" element={<Services />} />
-        <Route path="/property" element={<Blog />} />
-        <Route path="/pricing" element={<Pricing />} />
-        <Route path="/contact" element={<Contact />} />
-        <Route path="/profile" element={<Profile />} />
-        <Route path="/verify2fa" element={<Verify2FA />} />
-        <Route path="/favourites" element={<FavoritesList />} />
-        <Route path="/register" element={<Register/>} />
-        <Route path="/login" element={<Login />} />
-      </Routes>
+      <Switch>
+        <Route exact path="/" component={Home} />
+        <Route path="/property/:id" component={Detail} />
+        <Route path="/about" component={About} />
+        <Route path="/services" component={Services} />
+        <Route path="/property" component={Blog} />
+        <Route path="/pricing" component={Pricing} />
+        <Route path="/contact" component={Contact} />
+        <Route path="/profile" component={Profile} />
+        <Route path="/verify2fa" component={Verify2FA} />
+        <Route path="/favourites" component={FavoritesList} />
+        <Route path="/register" component={Register} />
+        <Route path="/login" component={Login} />
+      </Switch>
       <Footer />
     </BrowserRouter>
   );

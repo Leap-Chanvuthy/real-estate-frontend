@@ -179,56 +179,112 @@ export const awards = [
     name: "IITCA Green Award",
   },
 ]
+
+// export const location = [
+//   {
+//     id: 1,
+//     name: "New Orleans, Louisiana",
+//     Villas: "12 Villas",
+//     Apartments: "10 Apartments",
+//     Offices: "07 Offices",
+//     cover: "./images/location/city-1.png",
+//   },
+//   {
+//     id: 2,
+//     name: "Jerrsy, United State",
+//     Villas: "12 Villas",
+//     Apartments: "10 Apartments",
+//     Offices: "07 Offices",
+//     cover: "./images/location/city-2.png",
+//   },
+//   {
+//     id: 3,
+//     name: "Liverpool, London",
+//     Villas: "12 Villas",
+//     Apartments: " 10 Apartments",
+//     Offices: "07 Offices",
+//     cover: "./images/location/city-3.png",
+//   },
+//   {
+//     id: 4,
+//     name: "NewYork, United States",
+//     Villas: "12 Villas",
+//     Apartments: " 10 Apartments",
+//     Offices: "07 Offices",
+//     cover: "./images/location/city-4.png",
+//   },
+//   {
+//     id: 5,
+//     name: "Montreal, Canada",
+//     Villas: "12 Villas",
+//     Apartments: " 10 Apartments",
+//     Offices: "07 Offices",
+//     cover: "./images/location/city-5.png",
+//   },
+//   {
+//     id: 6,
+//     name: "California, USA",
+//     Villas: "12 Villas",
+//     Apartments: " 10 Apartments",
+//     Offices: "07 Offices",
+//     cover: "./images/location/city-6.png",
+//   },
+// ]
+
+
+
 export const location = [
   {
     id: 1,
-    name: "New Orleans, Louisiana",
+    name: "Phnom Penh, City",
     Villas: "12 Villas",
     Apartments: "10 Apartments",
     Offices: "07 Offices",
-    cover: "./images/location/city-1.png",
+    cover: "https://live.staticflickr.com/65535/49241124191_d51c175617_b.jpg",
   },
   {
     id: 2,
-    name: "Jerrsy, United State",
+    name: "Preah Sihanouk Ville",
     Villas: "12 Villas",
     Apartments: "10 Apartments",
     Offices: "07 Offices",
-    cover: "./images/location/city-2.png",
+    cover: "https://www.phnompenhrealestate.net/wp-content/uploads/2020/12/SHV.jpg",
   },
   {
     id: 3,
-    name: "Liverpool, London",
+    name: "Siem Reap Town",
     Villas: "12 Villas",
     Apartments: " 10 Apartments",
     Offices: "07 Offices",
-    cover: "./images/location/city-3.png",
+    cover: "https://i0.wp.com/www.cambodialifestyle.com/wp-content/uploads/2024/04/Siem-Reap-1.jpg",
   },
   {
     id: 4,
-    name: "NewYork, United States",
+    name: "Kompot Province",
     Villas: "12 Villas",
     Apartments: " 10 Apartments",
     Offices: "07 Offices",
-    cover: "./images/location/city-4.png",
+    cover: "https://www.khmertimeskh.com/wp-content/uploads/2023/04/57612.jpg",
   },
   {
     id: 5,
-    name: "Montreal, Canada",
+    name: "Koh Kong Province",
     Villas: "12 Villas",
     Apartments: " 10 Apartments",
     Offices: "07 Offices",
-    cover: "./images/location/city-5.png",
+    cover: "https://pppenglish.sgp1.digitaloceanspaces.com/image/main/field/image/topic-9_koh-sdach-located-in-kirisakor-district-koh-kong-on-oct-2018.-koh-kong-tourism-department-1.jpg",
   },
   {
     id: 6,
-    name: "California, USA",
+    name: "Battambang Province",
     Villas: "12 Villas",
     Apartments: " 10 Apartments",
     Offices: "07 Offices",
-    cover: "./images/location/city-6.png",
+    cover: "https://pppenglish.sgp1.digitaloceanspaces.com/image/main/field/image/a_statue_of_lok_ta_dambang_kronhung_at_his_namesake_roundabout_on_national_road_5_in_battambang_town._yousos_apdoulrashim.jpg",
   },
 ]
+
+
 export const team = [
   {
     list: "50",
