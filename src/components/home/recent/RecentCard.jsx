@@ -33,19 +33,16 @@ const RecentCard = () => {
   const fetchProperties = async (page = currentPage) => {
     dispatch(fetchPropertiesStart());
     try {
-      const response = await axios.get(`${BASE_URL}/properties/?page=${page}&filter%5BpropertyType.id%5D=${values.property_type}&filter%5Bmin_price%5D=${values.min_price}&filter%5Bmax_price%5D=${values.max_price}&filter%5Bnumber_of_bedrooms%5D=${values.number_of_bedrooms}&filter%5Bnumber_of_bathrooms%5D=${values.number_of_bathrooms}` ,  
-        {
-                  params: {
+      const response = await axios.get(`${BASE_URL}/properties`, {
+        params: {
           page,
-          "filter[propertyType.id]": values.property_type,
-          "filter[min_price]": values.min_price,
-          "filter[max_price]": values.max_price,
-          "filter[number_of_bedrooms]": values.number_of_bedrooms,
-          "filter[number_of_bathrooms]": values.number_of_bathrooms
-        }
-        }
-      );
-      // const response = await axios.get(`${BASE_URL}/properties/?page=${page}&filter%5BpropertyType.id%5D=1`);
+          'filter[propertyType.id]': values.property_type,
+          'filter[min_price]': values.min_price,
+          'filter[max_price]': values.max_price,
+          'filter[number_of_bedrooms]': values.number_of_bedrooms,
+          'filter[number_of_bathrooms]': values.number_of_bathrooms,
+        },
+      });
       dispatch(fetchPropertiesSuccess(response.data));
       setCurrentPage(response.data.meta.current_page);
       setTotalPage(response.data.meta.last_page);

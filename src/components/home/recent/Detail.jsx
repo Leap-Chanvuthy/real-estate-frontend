@@ -278,48 +278,48 @@ const Detail = () => {
                 <h3 className="my-8 font-bold text-lg">Property Features</h3>
                 <div className="flex flex-wrap justify-start items-start gap-4">
                   <li className="flex items-center gap-4">
-                    <div className="border-2 border-green-100 rounded-full p-2">
-                      <FaBath className="text-md text-green-300" />
+                    <div className="border-2 border-[gray-900] rounded-full p-2">
+                      <FaBath className="text-md text-[#4287f5]" />
                     </div>
                     <p className="font-semibold text-gray-600">
                       {property.features.number_of_bathrooms} Bath Rooms
                     </p>
                   </li>
                   <li className="flex items-center gap-4">
-                    <div className="border-2 border-green-100 rounded-full p-2">
-                      <FaBed className="text-md text-green-300" />
+                    <div className="border-2 border-[gray-900] rounded-full p-2">
+                      <FaBed className="text-md text-[#4287f5]" />
                     </div>
                     <p className="font-semibold text-gray-600">
                       {property.features.number_of_bedrooms} Bed Rooms
                     </p>
                   </li>
                   <li className="flex items-center gap-4">
-                    <div className="border-2 border-green-100 rounded-full p-2">
-                      <FaCar className="text-md text-green-300" />
+                    <div className="border-2 border-[gray-900] rounded-full p-2">
+                      <FaCar className="text-md text-[#4287f5]" />
                     </div>
                     <p className="font-semibold text-gray-600">
                       {property.features.number_of_car_spaces} Car Spaces
                     </p>
                   </li>
                   <li className="flex items-center gap-4">
-                    <div className="border-2 border-green-100 rounded-full p-2">
-                      <MdOutlineHomeMini className="text-md text-green-300" />
+                    <div className="border-2 border-[gray-900] rounded-full p-2">
+                      <MdOutlineHomeMini className="text-md text-[#4287f5]" />
                     </div>
                     <p className="font-semibold text-gray-600">
                       {property.features.number_of_floors} Floors
                     </p>
                   </li>
                   <li className="flex items-center gap-4">
-                    <div className="border-2 border-green-100 rounded-full p-2">
-                      <FaBed className="text-md text-green-300" />
+                    <div className="border-2 border-[gray-900] rounded-full p-2">
+                      <FaBed className="text-md text-[#4287f5]" />
                     </div>
                     <p className="font-semibold text-gray-600">
                       {property.features.number_of_guestroom} Guest Rooms
                     </p>
                   </li>
                   <li className="flex items-center gap-4">
-                    <div className="border-2 border-green-100 rounded-full p-2">
-                      <FaKitchenSet className="text-md text-green-300" />
+                    <div className="border-2 border-[gray-900] rounded-full p-2">
+                      <FaKitchenSet className="text-md text-[#4287f5]" />
                     </div>
                     <p className="font-semibold text-gray-600">
                       {property.features.number_of_kitchens} Kitchens
