@@ -16,8 +16,20 @@ import Profile from "../profile/Profile";
 import Verify2FA from "../profile/components/Verify2FA";
 import FavoritesList from "../favourite/FavouritesList";
 import CrispChat from "../../crisp/Chat";
+import { useSelector } from "react-redux";
+import Snackbar from '@mui/material/Snackbar';
+import Alert from '@mui/material/Alert';
+import { FaTimes } from 'react-icons/fa';
 
 const Pages = () => {
+
+  const {currentUser} = useSelector((state) => state.auth);
+  const user = currentUser?.user;
+  const [openSnackbar, setOpenSnackbar] = React.useState(!user);
+  const handleCloseSnackbar = () => {
+    setOpenSnackbar(user);
+  };
+
   return (
     <BrowserRouter>
       <Header />
@@ -36,7 +48,29 @@ const Pages = () => {
         <Route path="/register" component={Register} />
         <Route path="/login" component={Login} />
       </Switch>
-      <CrispChat />
+      <div>
+        {user ? <CrispChat /> : 
+          <Snackbar
+          open={!user}
+          onClose={handleCloseSnackbar}
+          message="You need to be logged in to use the chat feature."
+          anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+          action={
+            <div
+              style={{ display: 'flex', alignItems: 'center', cursor: 'pointer' }}
+              onClick={handleCloseSnackbar}
+            >
+              <FaTimes size={20} />
+            </div>
+          }
+        >
+          <Alert onClose={handleCloseSnackbar} severity="info" sx={{ width: '100%' }}>
+            Login to user our chat feature
+          </Alert>
+        </Snackbar>
+         }
+      </div>
+      
       <Footer />
     </BrowserRouter>
   );
