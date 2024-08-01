@@ -92,16 +92,16 @@ const Review = () => {
             value={values.review}
             onChange={handleChange}
           />
-          <TextField
-            fullWidth
-            label="Rate 1 to 5"
-            id="rating"
-            type="number"
-            error={Boolean(errorArray?.rating)}
-            helperText={errorArray?.rating ? errorArray.rating.join(", ") : ""}
-            value={values.rating}
-            onChange={handleChange}
-          />
+          {/*<TextField*/}
+          {/*  fullWidth*/}
+          {/*  label="Rate 1 to 5"*/}
+          {/*  id="rating"*/}
+          {/*  type="number"*/}
+          {/*  error={Boolean(errorArray?.rating)}*/}
+          {/*  helperText={errorArray?.rating ? errorArray.rating.join(", ") : ""}*/}
+          {/*  value={values.rating}*/}
+          {/*  onChange={handleChange}*/}
+          {/*/>*/}
         </div>
         <div className="mt-2">
           <Button variant="outlined" size="medium" type="submit">
