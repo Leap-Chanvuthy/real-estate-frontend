@@ -65,7 +65,7 @@ const Pages = () => {
           }
         >
           <Alert onClose={handleCloseSnackbar} severity="info" sx={{ width: '100%' }}>
-            Login to user our chat feature
+            Login Required To Use Chat Feature
           </Alert>
         </Snackbar>
          }
