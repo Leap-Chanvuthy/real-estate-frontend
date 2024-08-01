@@ -107,8 +107,8 @@ const Detail = () => {
   }
 
   return (
-    <div className="w-full flex flex-col gap-3 bg-gray-100 p-6 md:p-10">
-      <div className="max-w-6xl mx-auto bg-white shadow-lg rounded-lg overflow-hidden">
+    <div className="w-full flex flex-col gap-3  p-6 md:p-10">
+      <div className="">
         <ImageSlider images={images} />
         <div className="p-6 md:p-10">
           <div className="flex justify-between">
@@ -116,14 +116,13 @@ const Detail = () => {
               {property.property_type?.name}
             </h1>
             <div>
-              <p>PRICE</p>
-              <p className="text-green-600 font-bold mt-2 text-lg">
+              <p className="text-[#4287f5] font-bold mt-2 text-lg">
                 ${property.price}
               </p>
             </div>
           </div>
           <div className="flex justify-between items-center">
-            <div className="bg-orange-100 px-3 py-2 mt-3 w-[13rem] rounded-md font-bold text-orange-400">
+            <div className="bg-[#d7e7ff] px-3 py-2 mt-3 w-[13rem] rounded-md font-bold text-[#4287f5]">
               <p>{property.badge}</p>
             </div>
             {isFavourite ? (
@@ -147,8 +146,8 @@ const Detail = () => {
             className="mt-6"
           >
             <Tab label="General Info" />
-            <Tab label="Related Properties" />
             <Tab label="Reviews" />
+            <Tab label="Related Properties" />
           </Tabs>
 
           {activeTab === 0 && (
@@ -159,9 +158,10 @@ const Detail = () => {
                 <div className="flex flex-col lg:md:flex-row gap-8">
                   <div className="border-2 border-gray-100 rounded-lg p-5 flex flex-col gap-3">
                     <div className="flex flex-col items-center gap-2">
-                      <Avatar
+                      <img
                         alt="Remy Sharp"
                         out
+                        className="w-10 h-10 rounded-full border-2 border-gray-200"
                         src="https://i.pinimg.com/564x/20/8e/1f/208e1f4a8d572f1e41caa7ac49c10baa.jpg"
                       />
                       <p className="text-gray-600 mt-2 font-bold text-xl">
@@ -174,9 +174,9 @@ const Detail = () => {
                       <CiMail className="text-lg font-bold" />
                       <p>{property.agent?.email}</p>
                     </div>
-                    <div className="flex gap-3 bg-green-200 p-4 rounded-md font-bold">
-                      <MdOutlineLocalPhone className="text-lg font-bold" />
-                      <p className="text-gray-700">
+                    <div className="flex gap-3 bg-[#4287f5] p-4 rounded-md font-bold">
+                      <MdOutlineLocalPhone className="text-lg text-white font-bold" />
+                      <p className="text-white">
                         {property.agent?.phone_number}
                       </p>
                     </div>
@@ -340,14 +340,22 @@ const Detail = () => {
 
               {/* Review Form */}
               <div>
-                <h2 className="text-lg font-bold mt-8">Review Property</h2>
+                <h2 className="text-lg font-bold mt-8">Comment Property</h2>
                 <Review property_id={{ id }} />
               </div>
-
             </div>
           )}
 
           {activeTab === 1 && (
+            <div className="mt-6">
+              <h2 className="text-xl font-semibold text-gray-700">Comments</h2>
+              <div>
+                <ReviewList review={reviews} property_id={{ id }} />
+              </div>
+            </div>
+          )}
+
+          {activeTab === 2 && (
             <div className="mt-6">
               <h2 className="text-xl font-semibold text-gray-700">
                 Related Properties
@@ -362,7 +370,7 @@ const Detail = () => {
                       <img
                         src={
                           relatedProperty.property_images.length > 0
-                            ? `${relatedProperty.property_images[0].image}`
+                            ? `${BASE_IMAGE_URL}/${relatedProperty.property_images[0].image}`
                             : BASE_IMAGE_URL
                         }
                         alt="Property"
@@ -372,29 +380,23 @@ const Detail = () => {
                         <h3 className="text-lg font-semibold">
                           {relatedProperty.property_type?.name}
                         </h3>
-                        <p className="text-gray-600">
-                          {relatedProperty.property_location?.city?.name},{" "}
-                          {relatedProperty.property_location?.district?.name}
-                        </p>
+                        <div className="flex gap-1 items-center">
+                          <FaMapMarkerAlt className="text-md text-red-500" />
+                          <p className="text-gray-600">
+                            {relatedProperty.property_location?.city?.name},{" "}
+                            {relatedProperty.property_location?.district?.name}
+                          </p>
+                        </div>
                         <p className="text-gray-800 mt-2">
                           ${relatedProperty.price}
                         </p>
-                        <div className="bg-orange-100 px-3 py-2 mt-3 w-[8rem] rounded-md font-bold text-orange-400">
+                        <div className="bg-[#d7e7ff] px-3 py-2 mt-3 w-[11.5rem] rounded-md font-bold text-[#4287f5]">
                           <p>{relatedProperty.badge}</p>
                         </div>
                       </div>
                     </div>
                   </Link>
                 ))}
-              </div>
-            </div>
-          )}
-
-          {activeTab === 2 && (
-            <div className="mt-6">
-              <h2 className="text-xl font-semibold text-gray-700">Reviews</h2>
-              <div>
-                <ReviewList review={reviews} property_id={{ id }} />
               </div>
             </div>
           )}

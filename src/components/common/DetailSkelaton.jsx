@@ -4,8 +4,8 @@ import { useState } from "react";
 const DetailSkelaton = () => {
     const [activeTab, setActiveTab] = useState(0);
     return ( 
-        <div className="w-full flex flex-col gap-3 bg-gray-100 p-6 md:p-10">
-        <div className="max-w-6xl mx-auto bg-white shadow-lg rounded-lg overflow-hidden">
+        <div className="w-full flex flex-col gap-3  p-6 md:p-10">
+        <div >
           {/* Image Slider Skeleton */}
           <Skeleton variant="rectangular" width="100%" height={400} />
   

@@ -198,7 +198,7 @@ const ReviewList = ({ review }) => {
               </div>
               {!editMode[rev.id] ? (
                 <>
-                  <Rating name={`rating-${rev.id}`} value={rev.rating} readOnly />
+                  {/* <Rating name={`rating-${rev.id}`} value={rev.rating} readOnly /> */}
                   <p className="text-justify font-light">{rev.review}</p>
                 </>
               ) : (

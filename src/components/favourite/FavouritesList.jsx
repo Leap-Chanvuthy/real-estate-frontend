@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { removeFavourite } from '../../redux/slice/favouritesSlice';
 import { Link } from 'react-router-dom';
-import { DEFAULT_IMAGE } from '../../constants/const';
+import { DEFAULT_IMAGE , BASE_IMAGE_URL } from '../../constants/const';
 import { FaLocationDot } from "react-icons/fa6";
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import { Snackbar, Alert, Dialog, DialogActions, DialogContent, DialogTitle, Button, TextField } from '@mui/material';
@@ -39,6 +39,8 @@ const FavoritesList = () => {
     property.property_type?.name.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
+  console.log(items)
+
   return (
     <div className='m-10'>
       <div className='flex justify-between items-center gap-4 mb-5'>
@@ -66,7 +68,7 @@ const FavoritesList = () => {
               <div className='flex flex-col lg:flex-row gap-10'>
                 <Link to={`/property/${property.id}`}>
                     <img
-                      src={DEFAULT_IMAGE}
+                      src={`${BASE_IMAGE_URL}/${property.property_images[0].image}`}
                       className='w-80 rounded-md'
                       alt={property.property_type?.name}
                     />
@@ -87,10 +89,10 @@ const FavoritesList = () => {
                     )}
                   </div>
                   <div className='flex flex-col lg:md:flex-row gap-3'>
-                    <div className="bg-orange-100 px-3 py-2 w-[13rem] rounded-md font-bold text-orange-400">
+                    <div className="bg-[#d7e7ff] px-3 py-2 w-[13rem] rounded-md font-bold text-[#4287f5]">
                       <p>{property.badge}</p>
                     </div>
-                    <p className='font-bold text-green-500'>${property.price}</p>
+                    <p className='font-bold text-[#4287f5]'>${property.price}</p>
                   </div>
                   <p className='text-gray-600 text-justify'>
                     {property.property_location?.city?.name}, {property.property_location?.district?.name}, {property.property_location?.village?.name}

@@ -404,7 +404,7 @@ const RecentCard = () => {
                       </span>
                       {/* <i className="fa fa-heart my-3"></i> */}
                     </div>
-                    <div className="flex justify-between items-center">
+                    <div className="flex flex-col lg:md:flex-row justify-between ">
                       <p className="flex items-center gap-3 my-2">
                         <i className="fa fa-location-dot text-red-500 "></i>
                         <span>{property_location?.city?.name}</span>
@@ -412,7 +412,7 @@ const RecentCard = () => {
                       <span className="bg-[#2483c7] text-white rounded-md p-2">$ {price}</span>
                     </div>
                   </div>
-                  <div className="flex gap-3 mx-10 my-3">
+                  <div className="flex flex-col lg:md:flex-row gap-3 mx-5 my-3">
                     <div className="flex gap-1 items-center">
                       <div className="flex items-center gap-3">
                         <div className="w-8 h-8 flex items-center justify-center bg-gray-200 rounded-full">

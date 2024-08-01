@@ -8,7 +8,7 @@ const Location = () => {
     <>
       <section className='location padding'>
         <div className='container'>
-          <Heading title='Explore By Location' subtitle='Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.' />
+          <Heading title='Explore By Location' subtitle='This feature simplifies your property search, making it easier to locate opportunities that are conveniently situated near your desired amenities, workplaces, or lifestyle hubs.' />
 
           <div className='grid grid-cols-1 lg:md:grid-cols-2 gap-5 mt-5'>
             {location.map((item, index) => (
