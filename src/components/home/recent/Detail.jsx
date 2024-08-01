@@ -146,7 +146,7 @@ const Detail = () => {
             className="mt-6"
           >
             <Tab label="General Info" />
-            <Tab label="Reviews" />
+            <Tab label="Comments" />
             <Tab label="Related Properties" />
           </Tabs>
 
