@@ -30,7 +30,7 @@ const Team = () => {
 
     return (
         <section className="team bg-gray-200 py-12">
-            <Heading title="Our Featured Agents" subtitle="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam." />
+            <Heading title="Our Featured Agents" subtitle="This is the top 10 agents" />
             <div className="container mx-auto px-4 overflow-x-auto">
                 <div className="flex flex-nowrap mt-6">
                     {agents.map((agent, index) => (

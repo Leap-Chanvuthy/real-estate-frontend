@@ -24,9 +24,9 @@ const Pages = () => {
         <Route exact path="/" component={Home} />
         <Route path="/property/:id" component={Detail} />
         <Route path="/about" component={About} />
-        <Route path="/services" component={Services} />
+        {/*<Route path="/services" component={Services} />*/}
         <Route path="/property" component={Blog} />
-        <Route path="/pricing" component={Pricing} />
+        {/*<Route path="/pricing" component={Pricing} />*/}
         <Route path="/contact" component={Contact} />
         <Route path="/profile" component={Profile} />
         <Route path="/verify2fa" component={Verify2FA} />

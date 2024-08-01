@@ -7,18 +7,18 @@ export const nav = [
     text: "about",
     path: "/about",
   },
-  {
-    text: "services",
-    path: "/services",
-  },
-  {
-    text: "property",
-    path: "/property",
-  },
-  {
-    text: "pricing",
-    path: "/pricing",
-  },
+  // {
+  //   text: "services",
+  //   path: "/services",
+  // },
+  // {
+  //   text: "property",
+  //   path: "/property",
+  // },
+  // {
+  //   text: "pricing",
+  //   path: "/pricing",
+  // },
   {
     text: "contact",
     path: "/contact",
