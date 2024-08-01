@@ -15,6 +15,7 @@ import ProtectedRoute from "../auth/ProtectedRoute";
 import Profile from "../profile/Profile";
 import Verify2FA from "../profile/components/Verify2FA";
 import FavoritesList from "../favourite/FavouritesList";
+import CrispChat from "../../crisp/Chat";
 
 const Pages = () => {
   return (
@@ -23,6 +24,7 @@ const Pages = () => {
       <Switch>
         <Route exact path="/" component={Home} />
         <Route path="/property/:id" component={Detail} />
+        {/* <Route path="/chat" component={CrispChat} /> */}
         <Route path="/about" component={About} />
         {/*<Route path="/services" component={Services} />*/}
         <Route path="/property" component={Blog} />
@@ -34,6 +36,7 @@ const Pages = () => {
         <Route path="/register" component={Register} />
         <Route path="/login" component={Login} />
       </Switch>
+      <CrispChat />
       <Footer />
     </BrowserRouter>
   );
