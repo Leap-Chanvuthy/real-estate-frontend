@@ -45,6 +45,7 @@ const RecentCard = () => {
           'filter[sold_type]': values.sold_type,
           'filter[badge]': values.badge,
           'filter[license]': values.license,
+          'sort': values.sort,
         },
       });
       dispatch(fetchPropertiesSuccess(response.data));
@@ -281,6 +282,28 @@ const RecentCard = () => {
     },
   ]);
 
+  const [sort, setSort] = useState([
+    { name: 'Old', sort: 'created_at' },
+    { name: 'New', sort: '-created_at' },
+    { name: 'Price (Lower to higher)', sort: 'price' },
+    { name: 'Price (Higher to lower)', sort: '-price' },
+    { name: 'Area (Lower to higher)', sort: 'area' },
+    { name: 'Area (Higher to lower)', sort: '-area' },
+    { name: 'Number of Bedrooms (Lower to higher)', sort: 'number_of_bedrooms' },
+    { name: 'Number of Bedrooms (Higher to lower)', sort: '-number_of_bedrooms' },
+    { name: 'Number of Bathrooms (Lower to higher)', sort: 'number_of_bathrooms' },
+    { name: 'Number of Bathrooms (Higher to lower)', sort: '-number_of_bathrooms' },
+    { name: 'Number of Kitchens (Lower to higher)', sort: 'number_of_kitchens' },
+    { name: 'Number of Kitchens (Higher to lower)', sort: '-number_of_kitchens' },
+    { name: 'Number of Car Spaces (Lower to higher)', sort: 'number_of_car_spaces' },
+    { name: 'Number of Car Spaces (Higher to lower)', sort: '-number_of_car_spaces' },
+    { name: 'Number of Floor (Lower to higher)', sort: 'number_of_floor' },
+    { name: 'Number of Floor (Higher to lower)', sort: '-number_of_floor' },
+    { name: 'Number of Guestroom (Lower to higher)', sort: 'number_of_guestroom' },
+    { name: 'Number of Guestroom (Higher to lower)', sort: '-number_of_guestroom' }
+  ]);
+
+
   // filter and serch value
 
   const [values , setValues] = useState({
@@ -293,6 +316,7 @@ const RecentCard = () => {
     sold_type: "",
     badge: '',
     license: '',
+    sort: '',
   })
 
   // clear filter 
@@ -307,6 +331,7 @@ const RecentCard = () => {
       sold_type: "",
       badge: '',
       license: '',
+      sort: '',
     })
   }
 
@@ -364,6 +389,21 @@ const RecentCard = () => {
             fetchProperties();
           }}>
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+              <FormControl sx={{minWidth: 200}}>
+                <InputLabel id="sort-label">Sale/Rent</InputLabel>
+                <Select
+                    labelId="sort-label"
+                    id="sort"
+                    name="sort"
+                    value={values.sort}
+                    onChange={handleChangeSearchValue}
+                >
+                  <MenuItem value=""><em>None</em></MenuItem>
+                  {sort && sort.map((sort) => (
+                      <MenuItem key={sort.sort} value={sort.sort}>{sort.name}</MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
               <FormControl sx={{minWidth: 200}}>
                 <InputLabel id="sold-type-label">Sale/Rent</InputLabel>
                 <Select
