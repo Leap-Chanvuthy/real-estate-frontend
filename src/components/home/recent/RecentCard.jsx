@@ -381,16 +381,16 @@ const RecentCard = () => {
   );
 
   return (
-      <div className="flex flex-col px-4 py-6">
+      <div className="flex flex-col px-4 mb-5">
         {/* Search and Filter */}
-        <div className="my-10">
+        <div>
           <form className="flex flex-col gap-6" onSubmit={(e) => {
             e.preventDefault();
             fetchProperties();
           }}>
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
               <FormControl sx={{minWidth: 200}}>
-                <InputLabel id="sort-label">Sale/Rent</InputLabel>
+                <InputLabel id="sort-label">Sort: Relevance</InputLabel>
                 <Select
                     labelId="sort-label"
                     id="sort"
