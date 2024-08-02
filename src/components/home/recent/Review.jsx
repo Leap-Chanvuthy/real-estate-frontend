@@ -79,6 +79,13 @@ const Review = () => {
 
   return (
     <div>
+      {
+        currentUser ? ( // Show review form only if user is logged in
+            <h3 className="text-xl font-semibold mb-3">Leave a review</h3>
+            ) : (
+            <h3 className="text-xl font-semibold mb-3">Login to leave a review</h3>
+            )
+      }
       <form onSubmit={createReview}>
         <div className="flex flex-col gap-3">
           <TextField
@@ -115,10 +122,10 @@ const Review = () => {
         onClose={handleCloseSnackbar}
         message={
           openSuccessSnackbar
-            ? "Review submitted successfully!"
+            ? "Comment submitted successfully!"
             : openErrorSnackbar
-            ? "Failed to submit review."
-            : "Login required to submit a review."
+            ? "Failed to submit comment."
+            : "Login required to submit a comment."
         }
         anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
       />

@@ -86,7 +86,7 @@
 
 
 import { useSelector, useDispatch } from "react-redux";
-import { useState } from "react";
+import {useEffect, useState} from "react";
 import axios from "axios";
 import { CircularProgress , Button  } from "@mui/material";
 import UpdateProfile from "./components/UpdateProfile";
@@ -113,6 +113,10 @@ const Profile = () => {
   const [loading, setLoading] = useState(false);
   const [is2FAEnabled, setIs2FAEnabled] = useState(user.two_fa_enabled);
   const [qrImage, setQrImage] = useState(null);  // State to store QR code image
+
+  useEffect(() => {
+    window.scrollTo(0, 0); // Scroll to top on mount
+  }, []);
 
   const handleChange = (e) => {
     const key = e.target.id;
