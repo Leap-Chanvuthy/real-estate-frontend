@@ -311,7 +311,7 @@ const RecentCard = () => {
   }
 
   const handleChangeSearchValue = (e) => {
-    const key = e.target.name; // Use `name` instead of `id`
+    const key = e.target.name;
     const value = e.target.value;
     setValues({ ...values, [key]: value });
   };
