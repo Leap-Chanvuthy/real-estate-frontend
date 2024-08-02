@@ -182,9 +182,12 @@ const Profile = () => {
       <hr />
       <UpdatePassword />
       <hr />
-      <div className="my-10 flex flex-col lg:md:flex-row justify-between items-center">
-        <h3 className="font-bold text-lg">Logout From Your Account</h3>
-        <Button variant="outlined" color="error" onClick={handleLogout} className="btn btn-primary">Logout</Button>
+      <div className="my-10 flex flex-col lg:md:flex-row justify-between">
+        <div>
+          <h3 className="font-bold text-lg">Logout From Your Account</h3>
+          <div className="m-5"><Button variant="outlined" color="error" onClick={handleLogout} className="btn btn-primary">Logout</Button></div>
+        </div>
+        <></>
       </div>
       <hr/>
       <div>

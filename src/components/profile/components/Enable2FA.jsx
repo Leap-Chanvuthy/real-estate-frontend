@@ -75,6 +75,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { CircularProgress, Button } from '@mui/material';
 import { updateUserProfile } from "../../../redux/slice/authSlice";
 import { Link } from "react-router-dom";
+import { BASE_URL } from "../../../constants/const";
 
 const Enable2FA = ({ on2FAEnabled }) => {
   const { currentUser } = useSelector((state) => state.auth);
@@ -89,7 +90,7 @@ const Enable2FA = ({ on2FAEnabled }) => {
     try {
       setLoading(true);
       const response = await axios.post(
-        "http://127.0.0.1:8000/api/enable2fa",
+        `${BASE_URL}/enable2fa`,
         null,
         {
           headers: { Authorization: `Bearer ${authorisation.token}` },

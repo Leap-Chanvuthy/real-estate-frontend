@@ -61,6 +61,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { CircularProgress, Button } from '@mui/material';
 import { updateUserProfile } from "../../../redux/slice/authSlice";
 import { Link } from "react-router-dom";
+import { BASE_URL } from "../../../constants/const";
 
 const Disable2FA = ({ qrImage, on2FADisabled }) => {
   const { currentUser } = useSelector((state) => state.auth);
@@ -74,7 +75,7 @@ const Disable2FA = ({ qrImage, on2FADisabled }) => {
     try {
       setLoading(true);
       const response = await axios.post(
-        "http://127.0.0.1:8000/api/disable2fa",
+        `${BASE_URL}/disable2fa`,
         null,
         {
           headers: { Authorization: `Bearer ${authorisation.token}` },
