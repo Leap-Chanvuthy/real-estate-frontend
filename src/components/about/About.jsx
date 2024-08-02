@@ -1,10 +1,13 @@
-import React from "react"
+import React, {useEffect} from "react"
 import Back from "../common/Back"
 import Heading from "../common/Heading"
 import img from "../images/about.jpg"
 import "./about.css"
 
 const About = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0); // Scroll to top on mount
+  }, []);
   return (
     <>
       <section className='about'>

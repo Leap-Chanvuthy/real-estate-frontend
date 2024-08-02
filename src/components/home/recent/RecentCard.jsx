@@ -36,11 +36,15 @@ const RecentCard = () => {
       const response = await axios.get(`${BASE_URL}/properties`, {
         params: {
           page,
+          'filter[city_name]': values.city_name,
           'filter[propertyType.id]': values.property_type,
           'filter[min_price]': values.min_price,
           'filter[max_price]': values.max_price,
           'filter[number_of_bedrooms]': values.number_of_bedrooms,
           'filter[number_of_bathrooms]': values.number_of_bathrooms,
+          'filter[sold_type]': values.sold_type,
+          'filter[badge]': values.badge,
+          'filter[license]': values.license,
         },
       });
       dispatch(fetchPropertiesSuccess(response.data));
@@ -57,7 +61,41 @@ const RecentCard = () => {
     fetchProperties(newPage);
   };
 
-  
+  const [cities, setCities] = useState([
+    { name: 'Phnom Penh' },
+    { name: 'Siem Reap' },
+    { name: 'Battambang' },
+    { name: 'Sihanoukville' },
+    { name: 'Kampong Cham' },
+    { name: 'Kampot' },
+    { name: 'Kep' },
+    { name: 'Poipet' },
+    { name: 'Ta Khmau' },
+    { name: 'Pursat' },
+    { name: 'Kampong Thom' },
+    { name: 'Svay Rieng' },
+    { name: 'Prey Veng' },
+    { name: 'Stung Treng' },
+    { name: 'Kratie' },
+    { name: 'Pailin' },
+    { name: 'Senmonorom' },
+    { name: 'Banlung' },
+    { name: 'Samraong' },
+    { name: 'Suong' },
+    { name: 'Takeo' },
+    { name: 'Kampong Speu' },
+    { name: 'Koh Kong' },
+    { name: 'Preah Vihear' },
+    { name: 'Banteay Meanchey' },
+    { name: 'Kandal' },
+    { name: 'Preah Sihanouk' },
+    { name: 'Mondulkiri' },
+    { name: 'Ratanakiri' },
+    { name: 'Oddar Meanchey' },
+    { name: 'Tboung Khmum' }
+  ]);
+
+
   // Search dataset 
   const [minPrice , setMinPrice] = useState([
     {
@@ -206,24 +244,69 @@ const RecentCard = () => {
     },
   ]);
 
+  const [soldType , setSoldType] = useState([
+    {
+      name : 'For Sale',
+      soldType : 'FOR_SALE',
+    },
+    {
+      name : 'For Rent',
+      soldType : 'FOR_RENT',
+    },
+  ]);
+
+  const [badges , setBadges] = useState([
+    {
+      name : 'Urgent',
+      badge : 'URGENT',
+    },
+    {
+      name : 'Negotiate',
+      badge : 'NEGOTIATE',
+    },
+    {
+      name : 'Lower Market Price',
+      badge : 'LOWER_MARKET_PRICE',
+    },
+  ]);
+
+  const [license , setLicense] = useState([
+    {
+      name : 'Hard',
+      license : 'HARD',
+    },
+    {
+      name : 'Soft',
+      license : 'SOFT',
+    },
+  ]);
+
   // filter and serch value
 
   const [values , setValues] = useState({
+    city_name : "",
     property_type : "",
     min_price : "",
     max_price : "",
     number_of_bedrooms : "",
-    number_of_bathrooms : ""
+    number_of_bathrooms : "",
+    sold_type: "",
+    badge: '',
+    license: '',
   })
 
   // clear filter 
   const clearFilter = () =>{
     setValues({
+      city_name : "",
       property_type : "",
       min_price : "",
       max_price : "",
       number_of_bedrooms : "",
-      number_of_bathrooms : ""
+      number_of_bathrooms : "",
+      sold_type: "",
+      badge: '',
+      license: '',
     })
   }
 
@@ -273,183 +356,226 @@ const RecentCard = () => {
   );
 
   return (
-    <div className="flex flex-col">
-      {/* Serach and Filter */}
-      <div className="my-10">
-      <form className="flex flex-col gap-3" onSubmit={((e) => {e.preventDefault(); fetchProperties()})}>
-      <div className="flex flex-col lg:flex-row gap-3">
-        <FormControl sx={{ minWidth: 200 }}>
-          <InputLabel id="property-type-label">Property Type</InputLabel>
-          <Select
-            labelId="property-type-label"
-            id="property_type"
-            name="property_type" // Add name attribute
-            value={values.property_type}
-            onChange={handleChangeSearchValue}
-          >
-            <MenuItem value="">
-              <em>None</em>
-            </MenuItem>
-            {propertyTypes && propertyTypes.map((ppt) => (
-              <MenuItem key={ppt.id} value={ppt.id}>{ppt.property_type}</MenuItem>
-            ))}
-          </Select>
-        </FormControl>
-        <FormControl sx={{ minWidth: 200 }}>
-          <InputLabel id="min-price-label">Minimum Price</InputLabel>
-          <Select
-            labelId="min-price-label"
-            id="min_price"
-            name="min_price" // Add name attribute
-            value={values.min_price}
-            onChange={handleChangeSearchValue}
-          >
-            <MenuItem value="">
-              <em>None</em>
-            </MenuItem>
-            {minPrice && minPrice.map((min) => (
-              <MenuItem key={min.id} value={min.price}>{min.price}</MenuItem>
-            ))}
-          </Select>
-        </FormControl>
-        <FormControl sx={{ minWidth: 200 }}>
-          <InputLabel id="max-price-label">Maximum Price</InputLabel>
-          <Select
-            labelId="max-price-label"
-            id="max_price"
-            name="max_price" // Add name attribute
-            value={values.max_price}
-            onChange={handleChangeSearchValue}
-          >
-            <MenuItem value="">
-              <em>None</em>
-            </MenuItem>
-            {maxPrice && maxPrice.map((max) => (
-              <MenuItem key={max.id} value={max.price}>{max.price}</MenuItem>
-            ))}
-          </Select>
-        </FormControl>
-        <FormControl sx={{ minWidth: 200 }}>
-          <InputLabel id="bedrooms-label">Number of Bed Rooms</InputLabel>
-          <Select
-            labelId="bedrooms-label"
-            id="number_of_bedrooms"
-            name="number_of_bedrooms" // Add name attribute
-            value={values.number_of_bedrooms}
-            onChange={handleChangeSearchValue}
-          >
-            <MenuItem value="">
-              <em>None</em>
-            </MenuItem>
-            {bedRoom && bedRoom.map((bed) => (
-              <MenuItem key={bed.id} value={bed.bedroom}>{bed.bedroom}</MenuItem>
-            ))}
-          </Select>
-        </FormControl>
-        <FormControl sx={{ minWidth: 200 }}>
-          <InputLabel id="bathrooms-label">Number of Bath Rooms</InputLabel>
-          <Select
-            labelId="bathrooms-label"
-            id="number_of_bathrooms"
-            name="number_of_bathrooms" // Add name attribute
-            value={values.number_of_bathrooms}
-            onChange={handleChangeSearchValue}
-          >
-            <MenuItem value="">
-              <em>None</em>
-            </MenuItem>
-            {bathRoom && bathRoom.map((bathroom) => (
-              <MenuItem key={bathroom.id} value={bathroom.bathroom}>{bathroom.bathroom}</MenuItem>
-            ))}
-          </Select>
-        </FormControl>
-      </div>
-      <div className="flex flex-col lg:flex-row gap-3">
-        <Button variant="outlined" type="submit">Search</Button>
-        <Button variant="outlined" color="error" onClick={clearFilter}>Clear Filter</Button>
-      </div>
-    </form>
-      </div>
-      {loading && <SkeletonLoading />}
-      {error && <p className="text-red-500 text-center">{error}</p>}
-      <div className="grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 gap-4 mt-5">
-        {Array.isArray(properties.data) &&
-          properties.data.map((property, index) => {
-            const { price, badge, property_location, property_images, property_type , features } = property;
-            { if (properties.data.length == 0) return (<p>No such properties found.</p>) }
-            return (
-              <div className="box shadow" key={index}>
-                <Link to={`/property/${property.id}`}>
-                  <div className="img">
-                    {property_images.length > 0 ? (
-                      <img
-                        src={`${BASE_IMAGE_URL}/${property_images[0].image}`}
-                        alt="property"
-                        className="h-[15rem] object-cover"
-                      />
-                    ) : (
-                      <img src={DEFAULT_IMAGE} alt="property" className="h-[15rem] object-cover" />
-                    )}
-                  </div>
-                  <div className="text">
-                    <h4 className="font-bold my-3 text-lg">{property_type.name}</h4>
-                    <div className="category flexs">
-                      <span
-                        style={{
-                          background: badge === "FOR_SALE" ? "#25b5791a" : "#ff98001a",
-                          color: badge === "FOR_SALE" ? "#25b579" : "#ff9800",
-                        }}
-                      >
-                        {badge}
-                      </span>
-                      {/* <i className="fa fa-heart my-3"></i> */}
-                    </div>
-                    <div className="flex flex-col lg:md:flex-row justify-between ">
-                      <p className="flex items-center gap-3 my-2">
-                        <i className="fa fa-location-dot text-red-500 "></i>
-                        <span>{property_location?.city?.name}</span>
-                      </p>
-                      <span className="bg-[#2483c7] text-white rounded-md p-2">$ {price}</span>
-                    </div>
-                  </div>
-                  <div className="flex flex-col lg:md:flex-row gap-3 mx-5 my-3">
-                    <div className="flex gap-1 items-center">
-                      <div className="flex items-center gap-3">
-                        <div className="w-8 h-8 flex items-center justify-center bg-gray-200 rounded-full">
-                          <IoBedOutline className="text-gray-600" />
+      <div className="flex flex-col px-4 py-6">
+        {/* Search and Filter */}
+        <div className="my-10">
+          <form className="flex flex-col gap-6" onSubmit={(e) => {
+            e.preventDefault();
+            fetchProperties();
+          }}>
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+              <FormControl sx={{minWidth: 200}}>
+                <InputLabel id="sold-type-label">Sale/Rent</InputLabel>
+                <Select
+                    labelId="sold-type-label"
+                    id="sold_type"
+                    name="sold_type"
+                    value={values.sold_type}
+                    onChange={handleChangeSearchValue}
+                >
+                  <MenuItem value=""><em>None</em></MenuItem>
+                  {soldType && soldType.map((st) => (
+                      <MenuItem key={st.soldType} value={st.soldType}>{st.name}</MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
+              <FormControl sx={{minWidth: 200}}>
+                <InputLabel id="city-name-label">Cities/Provinces</InputLabel>
+                <Select
+                    labelId="city-name-label"
+                    id="city_name"
+                    name="city_name"
+                    value={values.city_name}
+                    onChange={handleChangeSearchValue}
+                >
+                  <MenuItem value=""><em>None</em></MenuItem>
+                  {cities && cities.map((city) => (
+                      <MenuItem key={city.name} value={city.name}>{city.name}</MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
+              <FormControl sx={{minWidth: 200}}>
+                <InputLabel id="property-type-label">Property Type</InputLabel>
+                <Select
+                    labelId="property-type-label"
+                    id="property_type"
+                    name="property_type"
+                    value={values.property_type}
+                    onChange={handleChangeSearchValue}
+                >
+                  <MenuItem value=""><em>None</em></MenuItem>
+                  {propertyTypes && propertyTypes.map((ppt) => (
+                      <MenuItem key={ppt.id} value={ppt.id}>{ppt.property_type}</MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
+              <FormControl sx={{minWidth: 200}}>
+                <InputLabel id="badge-label">Badge</InputLabel>
+                <Select
+                    labelId="badge-label"
+                    id="badge"
+                    name="badge"
+                    value={values.badge}
+                    onChange={handleChangeSearchValue}
+                >
+                  <MenuItem value=""><em>None</em></MenuItem>
+                  {badges && badges.map((badge) => (
+                      <MenuItem key={badge.badge} value={badge.badge}>{badge.name}</MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
+              <FormControl sx={{minWidth: 200}}>
+                <InputLabel id="license-label">License</InputLabel>
+                <Select
+                    labelId="license-label"
+                    id="license"
+                    name="license"
+                    value={values.license}
+                    onChange={handleChangeSearchValue}
+                >
+                  <MenuItem value=""><em>None</em></MenuItem>
+                  {license && license.map((license) => (
+                      <MenuItem key={license.license} value={license.license}>{license.name}</MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
+              <FormControl sx={{minWidth: 200}}>
+                <InputLabel id="min-price-label">Minimum Price</InputLabel>
+                <Select
+                    labelId="min-price-label"
+                    id="min_price"
+                    name="min_price"
+                    value={values.min_price}
+                    onChange={handleChangeSearchValue}
+                >
+                  <MenuItem value=""><em>None</em></MenuItem>
+                  {minPrice && minPrice.map((min) => (
+                      <MenuItem key={min.id} value={min.price}>{min.price}</MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
+              <FormControl sx={{minWidth: 200}}>
+                <InputLabel id="max-price-label">Maximum Price</InputLabel>
+                <Select
+                    labelId="max-price-label"
+                    id="max_price"
+                    name="max_price"
+                    value={values.max_price}
+                    onChange={handleChangeSearchValue}
+                >
+                  <MenuItem value=""><em>None</em></MenuItem>
+                  {maxPrice && maxPrice.map((max) => (
+                      <MenuItem key={max.id} value={max.price}>{max.price}</MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
+              <FormControl sx={{minWidth: 200}}>
+                <InputLabel id="bedrooms-label">Number of Bed Rooms</InputLabel>
+                <Select
+                    labelId="bedrooms-label"
+                    id="number_of_bedrooms"
+                    name="number_of_bedrooms"
+                    value={values.number_of_bedrooms}
+                    onChange={handleChangeSearchValue}
+                >
+                  <MenuItem value=""><em>None</em></MenuItem>
+                  {bedRoom && bedRoom.map((bed) => (
+                      <MenuItem key={bed.id} value={bed.bedroom}>{bed.bedroom}</MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
+              <FormControl sx={{minWidth: 200}}>
+                <InputLabel id="bathrooms-label">Number of Bath Rooms</InputLabel>
+                <Select
+                    labelId="bathrooms-label"
+                    id="number_of_bathrooms"
+                    name="number_of_bathrooms"
+                    value={values.number_of_bathrooms}
+                    onChange={handleChangeSearchValue}
+                >
+                  <MenuItem value=""><em>None</em></MenuItem>
+                  {bathRoom && bathRoom.map((bathroom) => (
+                      <MenuItem key={bathroom.id} value={bathroom.bathroom}>{bathroom.bathroom}</MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
+            </div>
+            <div className="flex justify-between gap-3 mt-4">
+              <Button variant="outlined" type="submit" color="primary">Search</Button>
+              <Button variant="outlined" color="error" onClick={clearFilter}>Clear Filter</Button>
+            </div>
+          </form>
+        </div>
+
+        {loading && <Skeleton variant="rectangular" width="100%" height={400}/>}
+        {error && <p className="text-red-500 text-center mt-4">{error}</p>}
+
+        <div className="grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 gap-6 mt-5">
+          {Array.isArray(properties.data) && properties.data.length > 0 ? (
+              properties.data.map((property, index) => {
+                const {price, badge, property_location, property_images, property_type, features} = property;
+                return (
+                    <div className="shadow-lg rounded-lg overflow-hidden" key={index}>
+                      <Link to={`/property/${property.id}`}>
+                        <div className="relative">
+                          {property_images.length > 0 ? (
+                              <img
+                                  src={`${BASE_IMAGE_URL}/${property_images[0].image}`}
+                                  alt="property"
+                                  className="w-full h-[15rem] object-cover"
+                              />
+                          ) : (
+                              <img src={DEFAULT_IMAGE} alt="property" className="w-full h-[15rem] object-cover"/>
+                          )}
+                          <div className="absolute top-0 right-0 bg-white p-2 text-xs rounded-bl-lg">
+                    <span
+                        className={`text-xs px-2 py-1 rounded-full ${badge === "FOR_SALE" ? "bg-green-100 text-green-600" : "bg-yellow-100 text-yellow-600"}`}>
+                      {badge}
+                    </span>
+                          </div>
                         </div>
-                        <p>{features.number_of_bedrooms}</p>
-                      </div>
-                      <p>Bedrooms</p>
-                    </div>
-                    <div className="flex gap-1 items-center">
-                      <div className="flex items-center gap-3">
-                        <div className="w-8 h-8 flex items-center justify-center bg-gray-200 rounded-full">
-                          <MdOutlineBathroom className="text-gray-600" />
+                        <div className="p-4">
+                          <h4 className="font-bold text-xl mb-2">{property_type.name}</h4>
+                          <div className="flex items-center gap-2 mb-2 text-sm">
+                            <i className="fa fa-location-dot text-red-500"></i>
+                            <span>{property_location?.city?.name}</span>
+                          </div>
+                          <div className="flex justify-between items-center mb-4">
+                            <span className="bg-blue-600 text-white rounded-md p-2 text-lg">${price}</span>
+                          </div>
+                          <div className="flex gap-4 text-sm">
+                            <div className="flex items-center gap-2">
+                              <IoBedOutline className="text-gray-600"/>
+                              <span>{features.number_of_bedrooms} Bedrooms</span>
+                            </div>
+                            <div className="flex items-center gap-2">
+                              <MdOutlineBathroom className="text-gray-600"/>
+                              <span>{features.number_of_bathrooms} Bathrooms</span>
+                            </div>
+                          </div>
                         </div>
-                        <p>{features.number_of_bathrooms}</p>
-                      </div>
-                      <p>Bathrooms</p>
+                      </Link>
                     </div>
-                  </div>
-                </Link>
-              </div>
-            );
-          })}
+                );
+              })
+          ) : (
+              <p className="text-center col-span-full mt-4">No such properties found.</p>
+          )}
+        </div>
+
+        <div className="mt-10">
+          <Pagination
+              count={totalPage}
+              page={currentPage}
+              onChange={handlePageChange}
+              shape="rounded"
+              size="large"
+              color="primary"
+              showFirstButton
+              showLastButton
+          />
+        </div>
       </div>
-      <div className="mt-10">
-        <Pagination
-          count={totalPage}
-          page={currentPage}
-          onChange={handlePageChange}
-          shape="rounded"
-          size="large"
-          color="primary"
-          showFirstButton
-          showLastButton
-        />
-      </div>
-    </div>
   );
 };
 

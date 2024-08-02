@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { removeFavourite } from '../../redux/slice/favouritesSlice';
 import { Link } from 'react-router-dom';
@@ -15,6 +15,10 @@ const FavoritesList = () => {
   const [dialogOpen, setDialogOpen] = useState(false);
   const [currentProperty, setCurrentProperty] = useState(null);
   const [searchQuery, setSearchQuery] = useState('');
+
+  useEffect(() => {
+    window.scrollTo(0, 0); // Scroll to top on mount
+  }, []);
 
   const handleFavouriteClick = (property) => {
     setCurrentProperty(property);
