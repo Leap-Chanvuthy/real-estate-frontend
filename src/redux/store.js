@@ -7,7 +7,7 @@ import propertiesReducer from './slice/propertiesSlice';
 import propertyTypesReducer from './slice/propertyTypesSlice';
 import agentsReducer from './slice/agentsSlice';
 import favouritesReducer from './slice/favouritesSlice';
-
+import companiesSliceReducer from './slice/companiesSlice';
 import { combineReducers } from 'redux';
 
 const persistConfig = {
@@ -22,6 +22,7 @@ const rootReducer = combineReducers({
   propertyTypes: propertyTypesReducer,
   agents: agentsReducer,
   favourites: favouritesReducer,
+  companies: companiesSliceReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
