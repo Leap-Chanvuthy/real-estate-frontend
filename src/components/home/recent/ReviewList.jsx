@@ -211,13 +211,13 @@ const ReviewList = ({ review }) => {
                     value={editText[rev.id] || ""}
                     onChange={(event) => handleEditTextChange(event, rev.id)}
                   />
-                  <TextField
-                    required
-                    label="Rating"
-                    value={editRating[rev.id] || ""}
-                    type="number"
-                    onChange={(e) => handleRatingChange(e.target.value, rev.id)}
-                  />
+                  {/*<TextField*/}
+                  {/*  required*/}
+                  {/*  label="Rating"*/}
+                  {/*  value={editRating[rev.id] || ""}*/}
+                  {/*  type="number"*/}
+                  {/*  onChange={(e) => handleRatingChange(e.target.value, rev.id)}*/}
+                  {/*/>*/}
                 </div>
               )}
             </div>
