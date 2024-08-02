@@ -70,3 +70,11 @@
   color: white;
   font-size: 20px;
 }
+
+/* styles.css or a CSS module */
+.profile-picture {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 50%;
+}
