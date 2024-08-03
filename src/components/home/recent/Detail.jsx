@@ -167,7 +167,8 @@ const Detail = () => {
                             <div>
                                 <h3 className="my-8 font-bold text-lg">General Information</h3>
                                 <div className="flex flex-col lg:md:flex-row gap-8">
-                                    <div className={`${!currentUser ? "blurred" : "border-2 border-gray-100 rounded-lg p-5 flex flex-col gap-3"}`}>
+                                    <div
+                                        className={`${!currentUser ? "blurred" : "border-2 border-gray-100 rounded-lg p-5 flex flex-col gap-3"}`}>
                                         <div className="flex flex-col items-center gap-2">
                                             <img
                                                 alt="Remy Sharp"
@@ -197,7 +198,8 @@ const Detail = () => {
                                         <div>
                                             <h3 className="text-lg font-semibold text-gray-700">Location</h3>
                                             <p className="text-gray-600 mt-2">
-                                                <div className="border-2 border-gray-300 rounded-full p-2 mr-2 inline-flex">
+                                                <div
+                                                    className="border-2 border-gray-300 rounded-full p-2 mr-2 inline-flex">
                                                     <FaMapMarkerAlt className="text-md text-red-500"/>
                                                 </div>
                                                 {property.property_location?.city?.name},{" "}
@@ -208,7 +210,8 @@ const Detail = () => {
                                         <div>
                                             <h3 className="text-lg font-semibold text-gray-700">Area</h3>
                                             <p className="text-gray-600 mt-2">
-                                                <div className="border-2 border-gray-300 rounded-full p-2 mr-2 inline-flex">
+                                                <div
+                                                    className="border-2 border-gray-300 rounded-full p-2 mr-2 inline-flex">
                                                     <TbChartArea className="text-md text-gray-700"/>
                                                 </div>
                                                 {property.area || <p className="text-red-300">Not Available</p>}
@@ -217,16 +220,19 @@ const Detail = () => {
                                         <div>
                                             <h3 className="text-lg font-semibold text-gray-700">License Type</h3>
                                             <p className="text-gray-600 mt-2">
-                                                <div className="border-2 border-gray-300 rounded-full p-2 mr-2 inline-flex">
+                                                <div
+                                                    className="border-2 border-gray-300 rounded-full p-2 mr-2 inline-flex">
                                                     <IoDocumentTextOutline className="text-md text-gray-700"/>
                                                 </div>
-                                                {property.license || <span className="text-red-300">Not Available</span>}
+                                                {property.license ||
+                                                    <span className="text-red-300">Not Available</span>}
                                             </p>
                                         </div>
                                         <div>
                                             <h3 className="text-lg font-semibold text-gray-700">Direction Facing</h3>
                                             <p className="text-gray-600 mt-2">
-                                                <div className="border-2 border-gray-300 rounded-full p-2 mr-2 inline-flex">
+                                                <div
+                                                    className="border-2 border-gray-300 rounded-full p-2 mr-2 inline-flex">
                                                     <GiDirectionSign className="text-md text-gray-700"/>
                                                 </div>
                                                 {property.facing || <span className="text-red-300">Not Available</span>}
@@ -235,20 +241,23 @@ const Detail = () => {
                                         <div>
                                             <h3 className="text-lg font-semibold text-gray-700">Land Type</h3>
                                             <p className="text-gray-600 mt-2">
-                                                {property.land_type || <span className="text-red-300">Not Available</span>}
+                                                {property.land.land_type ||
+                                                    <span className="text-red-300">Not Available</span>}
                                             </p>
                                         </div>
                                         <div>
                                             <h3 className="text-lg font-semibold text-gray-700">Price</h3>
                                             <p className="text-gray-600 mt-2">
                                                 ${" "}
-                                                {property.price || <span className="text-red-300">Price Not Available</span>}
+                                                {property.price ||
+                                                    <span className="text-red-300">Price Not Available</span>}
                                             </p>
                                         </div>
                                         <div>
                                             <h3 className="text-lg font-semibold text-gray-700">Sold Type</h3>
                                             <p className="text-gray-600 mt-2">
-                                                {property.sold_type || <span className="text-red-300">Not Available</span>}
+                                                {property.sold_type === 'FOR_RENT' ? 'For Rent' : 'For Sale' ||
+                                                    <span className="text-red-300">Not Available</span>}
                                             </p>
                                         </div>
                                     </div>
@@ -257,59 +266,62 @@ const Detail = () => {
 
 
                             {/* Features */}
-                            <div>
-                                <h3 className="my-8 font-bold text-lg">Property Features</h3>
-                                <div className="flex flex-wrap justify-start items-start gap-4">
-                                    <li className="flex items-center gap-4">
-                                        <div className="border-2 border-[gray-900] rounded-full p-2">
-                                            <FaBath className="text-md text-[#4287f5]"/>
-                                        </div>
-                                        <p className="font-semibold text-gray-600">
-                                            {property.features.number_of_bathrooms} Bath Rooms
-                                        </p>
-                                    </li>
-                                    <li className="flex items-center gap-4">
-                                        <div className="border-2 border-[gray-900] rounded-full p-2">
-                                            <FaBed className="text-md text-[#4287f5]"/>
-                                        </div>
-                                        <p className="font-semibold text-gray-600">
-                                            {property.features.number_of_bedrooms} Bed Rooms
-                                        </p>
-                                    </li>
-                                    <li className="flex items-center gap-4">
-                                        <div className="border-2 border-[gray-900] rounded-full p-2">
-                                            <FaCar className="text-md text-[#4287f5]"/>
-                                        </div>
-                                        <p className="font-semibold text-gray-600">
-                                            {property.features.number_of_car_spaces} Car Spaces
-                                        </p>
-                                    </li>
-                                    <li className="flex items-center gap-4">
-                                        <div className="border-2 border-[gray-900] rounded-full p-2">
-                                            <MdOutlineHomeMini className="text-md text-[#4287f5]"/>
-                                        </div>
-                                        <p className="font-semibold text-gray-600">
-                                            {property.features.number_of_floors} Floors
-                                        </p>
-                                    </li>
-                                    <li className="flex items-center gap-4">
-                                        <div className="border-2 border-[gray-900] rounded-full p-2">
-                                            <FaBed className="text-md text-[#4287f5]"/>
-                                        </div>
-                                        <p className="font-semibold text-gray-600">
-                                            {property.features.number_of_guestroom} Guest Rooms
-                                        </p>
-                                    </li>
-                                    <li className="flex items-center gap-4">
-                                        <div className="border-2 border-[gray-900] rounded-full p-2">
-                                            <FaKitchenSet className="text-md text-[#4287f5]"/>
-                                        </div>
-                                        <p className="font-semibold text-gray-600">
-                                            {property.features.number_of_kitchens} Kitchens
-                                        </p>
-                                    </li>
+                            {property.land.land_type === null &&
+                                <div>
+                                    <h3 className="my-8 font-bold text-lg">Property Features</h3>
+                                    <div className="flex flex-wrap justify-start items-start gap-4">
+                                        <li className="flex items-center gap-4">
+                                            <div className="border-2 border-[gray-900] rounded-full p-2">
+                                                <FaBath className="text-md text-[#4287f5]"/>
+                                            </div>
+                                            <p className="font-semibold text-gray-600">
+                                                {property.features.number_of_bathrooms} Bath Rooms
+                                            </p>
+                                        </li>
+                                        <li className="flex items-center gap-4">
+                                            <div className="border-2 border-[gray-900] rounded-full p-2">
+                                                <FaBed className="text-md text-[#4287f5]"/>
+                                            </div>
+                                            <p className="font-semibold text-gray-600">
+                                                {property.features.number_of_bedrooms} Bed Rooms
+                                            </p>
+                                        </li>
+                                        <li className="flex items-center gap-4">
+                                            <div className="border-2 border-[gray-900] rounded-full p-2">
+                                                <FaCar className="text-md text-[#4287f5]"/>
+                                            </div>
+                                            <p className="font-semibold text-gray-600">
+                                                {property.features.number_of_car_spaces} Car Spaces
+                                            </p>
+                                        </li>
+                                        <li className="flex items-center gap-4">
+                                            <div className="border-2 border-[gray-900] rounded-full p-2">
+                                                <MdOutlineHomeMini className="text-md text-[#4287f5]"/>
+                                            </div>
+                                            <p className="font-semibold text-gray-600">
+                                                {property.features.number_of_floors} Floors
+                                            </p>
+                                        </li>
+                                        <li className="flex items-center gap-4">
+                                            <div className="border-2 border-[gray-900] rounded-full p-2">
+                                                <FaBed className="text-md text-[#4287f5]"/>
+                                            </div>
+                                            <p className="font-semibold text-gray-600">
+                                                {property.features.number_of_guestroom} Guest Rooms
+                                            </p>
+                                        </li>
+                                        <li className="flex items-center gap-4">
+                                            <div className="border-2 border-[gray-900] rounded-full p-2">
+                                                <FaKitchenSet className="text-md text-[#4287f5]"/>
+                                            </div>
+                                            <p className="font-semibold text-gray-600">
+                                                {property.features.number_of_kitchens} Kitchens
+                                            </p>
+                                        </li>
+                                    </div>
                                 </div>
-                            </div>
+                            }
+
 
                             {/* Google Map */}
                             <div>
