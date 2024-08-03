@@ -49,26 +49,7 @@ const Pages = () => {
         <Route path="/login" component={Login} />
       </Switch>
       <div>
-        {user ? <CrispChat /> : 
-          <Snackbar
-          open={!user}
-          onClose={handleCloseSnackbar}
-          message="You need to be logged in to use the chat feature."
-          anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
-          action={
-            <div
-              style={{ display: 'flex', alignItems: 'center', cursor: 'pointer' }}
-              onClick={handleCloseSnackbar}
-            >
-              <FaTimes size={20} />
-            </div>
-          }
-        >
-          <Alert onClose={handleCloseSnackbar} severity="info" sx={{ width: '100%' }}>
-            Login Required To Use Chat Feature
-          </Alert>
-        </Snackbar>
-         }
+        {user && <CrispChat /> }
       </div>
       
       <Footer />
