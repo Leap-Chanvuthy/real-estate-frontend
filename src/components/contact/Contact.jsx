@@ -68,7 +68,7 @@ const Contact = () => {
   return (
       <>
         <section className='contact mb'>
-          <Back name='Contact Us' title='Get Helps & Friendly Support' cover={img} />
+          <Back name='Contact Us' title='Do you want to become our partners or an independent agency? Do not hesitate to contact us.' cover={img} />
           <div className='container'>
             {success && (
                 <Alert severity="success" className="w-full">
@@ -117,7 +117,7 @@ const Contact = () => {
                           name='is_company'
                       />
                     }
-                    label='Is Company'
+                    label='If you want to become our partners please check this box.'
                 />
               </FormGroup>
               <button type='submit'>Submit Request</button>
