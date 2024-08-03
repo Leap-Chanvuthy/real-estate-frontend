@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import axios from 'axios';
-import { BASE_URL } from "../../../constants/const";
+import {BASE_IMAGE_URL, BASE_URL} from "../../../constants/const";
 import { Skeleton } from "@mui/material";
 import { fetchCompaniesFailure, fetchCompaniesStart, fetchCompaniesSuccess } from "../../../redux/slice/companiesSlice";
 
@@ -37,7 +37,7 @@ const CompanyCard = () => {
             {companies.map((item, index) => (
                 <div key={index}
                      className='min-w-[200px] border border-gray-300 p-4 shadow-sm bg-white flex-shrink-0 rounded-lg'>
-                    <img width='100px' height='100px' src={item.company_logo} alt={item.company_name}/>
+                    <img width='100px' height='100px' src={BASE_IMAGE_URL +'/'+item.company_logo} alt={item.company_name}/>
                     <p className='mb-2 text-gray-600 font-bold'>{item.company_name}</p>
                     <p className='mb-2 text-gray-600'>Email: {item.company_email}</p>
                     <p className='mb-2 text-gray-600'>Number: {item.company_phone_number}</p>
