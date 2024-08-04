@@ -361,6 +361,10 @@ const Detail = () => {
                             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-4">
                                 {relatedProperties?.map((relatedProperty) => (
                                     <Link
+                                        onClick={() => {
+                                            setActiveTab(0)
+                                            window.scrollTo(0, 0)
+                                        }}
                                         to={`/property/${relatedProperty.id}`}
                                         key={relatedProperty.id}
                                     >
