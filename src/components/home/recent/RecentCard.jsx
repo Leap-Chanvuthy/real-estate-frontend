@@ -20,6 +20,8 @@ import {
 } from "../../../redux/slice/propertyTypesSlice";
 import {IoBedOutline} from "react-icons/io5";
 import {MdOutlineBathroom} from "react-icons/md";
+import { VscSettings } from "react-icons/vsc";
+
 import { CITY , MIN_PRICE , MAX_PRICE , BED_ROOM , BATH_ROOM , SOLD_TYPE , BADGE , LISENSE , SORT} from "../../filter/data";
 
 
@@ -326,6 +328,7 @@ const RecentCard = () => {
                             onClick={() => setShowMoreFilters(!showMoreFilters)}
                             variant="outlined"
                             color="primary"
+                            startIcon={<VscSettings/>}
                             className="text-blue-500 border-blue-500 hover:bg-blue-500 hover:text-white"
                         >
                             {showMoreFilters ? "Show Less Filters" : "See More Filters"}
