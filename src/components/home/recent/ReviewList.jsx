@@ -90,7 +90,7 @@ const ReviewList = ({ review }) => {
       if (updatedResponse.status === 200) {
         dispatch(fetchPropertiesSuccess(updatedResponse.data)); // Update properties state
         setToastSeverity("success");
-        setToastMessage("Review updated successfully.");
+        setToastMessage("Comment updated successfully.");
         setToastOpen(true);
       } else {
         throw new Error("Failed to fetch updated properties");
@@ -127,7 +127,7 @@ const ReviewList = ({ review }) => {
       if (updatedResponse.status === 200) {
         dispatch(fetchPropertiesSuccess(updatedResponse.data)); // Update properties state
         setToastSeverity("success");
-        setToastMessage("Review deleted successfully.");
+        setToastMessage("Comment deleted successfully.");
         setToastOpen(true);
       } else {
         throw new Error("Failed to fetch updated properties");
@@ -136,7 +136,7 @@ const ReviewList = ({ review }) => {
       console.error("Error deleting review:", error);
       dispatch(fetchPropertiesFailure(error.message));
       setToastSeverity("error");
-      setToastMessage("Failed to delete review.");
+      setToastMessage("Failed to delete comment.");
       setToastOpen(true);
     }
     setDeleteDialogOpen(false);

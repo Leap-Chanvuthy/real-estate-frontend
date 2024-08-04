@@ -79,21 +79,14 @@ const Review = () => {
 
   return (
     <div>
-      {
-        currentUser ? ( // Show review form only if user is logged in
-            <h3 className="text-xl font-semibold mb-3">Leave a review</h3>
-            ) : (
-            <h3 className="text-xl font-semibold mb-3">Login to leave a review</h3>
-            )
-      }
       <form onSubmit={createReview}>
         <div className="flex flex-col gap-3">
           <TextField
             fullWidth
             multiline
             rows={3}
-            label="Review"
-            id="review"
+            label="Comment"
+            id="comment"
             error={Boolean(errorArray?.review)}
             helperText={errorArray?.review ? errorArray.review.join(", ") : ""}
             value={values.review}
@@ -112,7 +105,7 @@ const Review = () => {
         </div>
         <div className="mt-2">
           <Button variant="outlined" size="medium" type="submit">
-            {loading ? <CircularProgress size={25} /> : "Review"}
+            {loading ? <CircularProgress size={25} /> : "Comment"}
           </Button>
         </div>
       </form>

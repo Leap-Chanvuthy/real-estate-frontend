@@ -202,9 +202,9 @@ const Detail = () => {
                                                     className="border-2 border-gray-300 rounded-full p-2 mr-2 inline-flex">
                                                     <FaMapMarkerAlt className="text-md text-red-500"/>
                                                 </div>
-                                                {property.property_location?.city?.name},{" "}
-                                                {property.property_location?.district?.name},{" "}
-                                                {property.property_location?.village?.name}
+                                                {property.property_location?.city?.name}
+                                                {/*{property.property_location?.district?.name},{" "}*/}
+                                                {/*{property.property_location?.village?.name}*/}
                                             </p>
                                         </div>
                                         <div>
@@ -381,8 +381,8 @@ const Detail = () => {
                                                 <div className="flex gap-1 items-center">
                                                     <FaMapMarkerAlt className="text-md text-red-500"/>
                                                     <p className="text-gray-600">
-                                                        {relatedProperty.property_location?.city?.name},{" "}
-                                                        {relatedProperty.property_location?.district?.name}
+                                                        {relatedProperty.property_location?.city?.name}
+                                                        {/*{relatedProperty.property_location?.district?.name}*/}
                                                     </p>
                                                 </div>
                                                 <p className="text-gray-800 mt-2">

@@ -113,7 +113,7 @@ const DetailSkelaton = () => {
 
             {/* Review */}
             <div>
-              <h3 className="my-8 font-bold text-lg">Review Property</h3>
+              <h3 className="my-8 font-bold text-lg">Comment Property</h3>
                 <div className="flex flex-col gap-3">
                   <Skeleton variant="rectangular" width="100%" height={70} />
                   <Skeleton variant="rectangular" width="100%" height={30} />
