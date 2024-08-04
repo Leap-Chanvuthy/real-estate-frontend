@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, {useEffect, useState} from "react";
 import img from "../images/pricing.jpg";
 import Back from "../common/Back";
 import "./contact.css";
@@ -19,6 +19,10 @@ const Contact = () => {
 
   const [errorMessage, setErrorMessage] = useState('');
   const [success, setSuccess] = useState(false);
+
+  useEffect(() => {
+    window.scrollTo(0, 0); // Scroll to top on mount
+  }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
