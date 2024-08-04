@@ -95,6 +95,7 @@ import Enable2FA from "./components/Enable2FA";
 import Disable2FA from "./components/Disable2FA";
 import { updateUserProfile, logout } from "../../redux/slice/authSlice";
 import { persistor } from "../../redux/store"; // Adjust the import based on your file structure
+import ProfilePicture from "./components/ProfilePicture";
 
 const Profile = () => {
   const { currentUser } = useSelector((state) => state.auth);
@@ -177,6 +178,7 @@ const Profile = () => {
 
   return (
     <div className="mx-10">
+      {/* <ProfilePicture /> */}
       {loading && <CircularProgress />}
       <UpdateProfile />
       <hr />
