@@ -170,7 +170,7 @@ const ReviewList = ({ review }) => {
                     <IconButton onClick={() => handleToggle(rev.id)} className="text-lg">
                       <BiDotsVerticalRounded />
                     </IconButton>
-                    <Collapse in={open[rev.id]} className="absolute right-0 bg-white border rounded shadow-lg">
+                    <Collapse in={open[rev.id]} className="absolute right-6 bottom-5 bg-white border rounded shadow-lg">
                       <div className="flex flex-col gap-2 p-2">
                         {!editMode[rev.id] ? (
                           <FaRegEdit
@@ -199,7 +199,7 @@ const ReviewList = ({ review }) => {
               {!editMode[rev.id] ? (
                 <>
                   {/* <Rating name={`rating-${rev.id}`} value={rev.rating} readOnly /> */}
-                  <p className="text-justify font-light">{rev.review}</p>
+                  <p className="font-light">{rev.review}</p>
                 </>
               ) : (
                 <div className="flex gap-3">

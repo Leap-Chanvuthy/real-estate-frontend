@@ -95,6 +95,7 @@ import {FaBars, FaTimes} from 'react-icons/fa';
 import {nav} from "../../data/Data";
 import {BsBookmarkHeartFill} from "react-icons/bs";
 import {Button} from "@mui/material";
+import { BASE_IMAGE_URL } from "../../../constants/const";
 
 const Header = () => {
     const [navListOpen, setNavListOpen] = useState(false);
@@ -144,7 +145,7 @@ const Header = () => {
                         </Link>
                         {user ? (
                             <Link to="/profile" className="flex items-center lg:hidden">
-                                <Avatar alt={user.name} src={user.profile_image || '/static/images/avatar/1.jpg'}/>
+                                <Avatar alt={user.name} src={`${BASE_IMAGE_URL}/${user.profile_picture}`}/>
                             </Link>
                         ) : (
                             <Link to="/register"
@@ -171,7 +172,7 @@ const Header = () => {
 
                     {user ? (
                         <Link to="/profile" className="flex items-center">
-                            <Avatar alt={user.name} src={user.profile_image || '/static/images/avatar/1.jpg'}/>
+                            <Avatar alt={user.name} src={`${BASE_IMAGE_URL}/${user.profile_picture}`}/>
                         </Link>
                     ) : (
                         <Link to="/register" className="text-blue-500 hover:text-blue-700">
