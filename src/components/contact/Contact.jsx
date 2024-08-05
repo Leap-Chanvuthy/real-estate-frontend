@@ -20,9 +20,9 @@ const Contact = () => {
   const [errorMessage, setErrorMessage] = useState('');
   const [success, setSuccess] = useState(false);
 
-  useEffect(() => {
-    window.scrollTo(0, 0); // Scroll to top on mount
-  }, []);
+  // useEffect(() => {
+  //   window.scrollTo(0, 0); // Scroll to top on mount
+  // }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
