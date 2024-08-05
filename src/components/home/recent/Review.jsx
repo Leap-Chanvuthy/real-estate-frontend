@@ -213,7 +213,7 @@ const Review = () => {
     <div>
       {
         currentUser ? ( // Show review form only if user is logged in
-            <h3 className="text-xl font-semibold mb-3">Leave a Comment</h3>
+            <h3 className="text-xl font-semibold mb-3 mt-5">Leave a Comment</h3>
             ) : (
             <h3 className="text-xl font-semibold mb-3">Login to leave a review</h3>
             )

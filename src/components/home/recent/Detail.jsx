@@ -336,7 +336,6 @@ const Detail = () => {
                             {/* Review Form */}
                             {currentUser && (
                                 <div>
-                                    <h2 className="text-lg font-bold mt-8">Comment Property</h2>
                                     <Review property_id={{id}}/>
                                 </div>
                             )
