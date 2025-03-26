@@ -16,7 +16,7 @@ const Home = () => {
             <Featured/>
             <Company/>
             {/*<Awards />*/}
-            <Location/>
+            {/*<Location/>*/}
             <Team/>
             {/*<Price />*/}
         </>
